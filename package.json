@@ -1,0 +1,31 @@
+{
+  "name": "voca-labor-manager",
+  "version": "1.0.0",
+  "description": "Vocational labor manager. Acts as a backend to the American Labor Company website.",
+  "main": "./src/index.js",
+  "scripts": {
+    "start": "node ./src/server.js",
+    "pretest": "eslint ./src --fix",
+    "test": "echo \"Tests complete\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jpw2065/web-app-dev-project-one.git"
+  },
+  "keywords": [
+    "Job",
+    "Labor",
+    "Skilled"
+  ],
+  "author": "Jack Watson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jpw2065/web-app-dev-project-one/issues"
+  },
+  "homepage": "https://github.com/jpw2065/web-app-dev-project-one#readme",
+  "devDependencies": {
+    "eslint": "^7.21.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-plugin-import": "^2.22.1"
+  }
+}

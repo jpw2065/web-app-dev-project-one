@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Our simple HTTP server</title>
+  <link rel="stylesheet" type="text/css" href="/style.css">
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
+  <script type="text/babel">
+    // const handleResponse = (xhr) => {
+    //   const content = document.querySelector('#users');
+      
+    //   let html = "";
+
+    //   switch(xhr.status)
+    //   {
+    //     case 200:
+    //       html += "<h1>Success</h1>";
+    //       break;
+    //     case 201:
+    //       html += "<h1>Create</h1>";
+    //       break;
+    //     case 204:
+    //       html += "<h1>Updated (No Content)</h1>";
+    //       break;
+    //     case 400:
+    //       html += "<h1>Bad Request</h1>";
+    //       break;
+    //     case 404:
+    //       html += "<h1>Resource Not Found</h1>";
+    //       break;
+    //     default :
+    //       break;
+    //   }
+
+    //   if(xhr.responseText != "")
+    //   {
+    //     html += xhr.responseText;
+    //   }
+    //   content.innerHTML = html;
+    // }
+
+    // const prepareXHR = (formId, suffix) => {
+
+    //   const form = document.querySelector("#" + formId);
+
+    //   const action = form.getAttribute('action') + suffix;
+    //   const method = form.getAttribute('method');
+
+    //   const xhr = new XMLHttpRequest();
+
+    //   xhr.open(method, action);
+
+    //   xhr.setRequestHeader('Accept', 'application/json');
+    //   xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+    //   xhr.onload = () => handleResponse(xhr);
+
+    //   return xhr;
+    // }
+
+    //     // Method obtained from this source:
+    // // https://stackoverflow.com/questions/7542586/new-formdata-application-x-www-form-urlencoded
+    // const urlencodeFormData = (fd) => {
+    //     var s = '';
+    //     function encode(s){ return encodeURIComponent(s).replace(/%20/g,'+'); }
+    //     for(var pair of fd.entries()){
+    //         if(typeof pair[1]=='string'){
+    //             s += (s?'&':'') + encode(pair[0])+'='+encode(pair[1]);
+    //         }
+    //     }
+    //     return s;
+    // }
+
+    // const postUserData = (e) =>{
+
+    //   e.preventDefault();
+
+    //   let xhr = prepareXHR("userForm", "");
+
+    //   let formData = new FormData( document.querySelector("#userForm") );
+    //   xhr.send(urlencodeFormData(formData));
+
+    // }
+
+    // const getAllUserData = (e) => {
+    //   e.preventDefault();
+
+    //   let xhr = prepareXHR("allUsersForm", "");
+    //   xhr.send();
+
+    // }
+
+    // const getSpecificUserData = (e) => {
+    //   e.preventDefault();
+    //   let id = document.querySelector("#id").value;
+      
+    //   let xhr = prepareXHR("allUsersForm", "/" + id);
+    //   xhr.send();
+    // } 
+    
+    // const init = () => {
+
+    //   const userForm = document.querySelector("#userForm");
+    //   userForm.addEventListener('submit', postUserData);
+
+    //   const allUsersForm = document.querySelector("#allUsersForm");
+    //   allUsersForm.addEventListener('submit', getAllUserData);
+
+    //   const specificUserForm = document.querySelector("#specificUserForm");
+    //   specificUserForm.addEventListener('submit', getSpecificUserData);
+
+    // };
+
+    // window.onload = init;
+
+  </script>
+</head>
+<body>
+
+  <nav>
+    <ul>
+      <li><a href="/index">Users</a></li>
+      <li><a href="/companies">Companies</a></li>
+    </ul>
+  </nav>
+  
+  <section id="top">
+    <h3>Companies</h3>
+
+    <!-- <form id="userForm" action="/users" method="post">
+      <label for="name">Name: </label>
+      <input id="name" type="text" name="name" />
+      <label for="email">Email: </label>
+      <input id="email" type="email" name="email" />
+      <label for="phone">Phone: </label>
+      <input id="phone" type="tel" name="phone" />
+      <label for="trade">Trade: </label>
+      <select id="trade" name="trade">
+        <option value="electrican" selected>Electrican</option>
+        <option value="hvac">HVAC</option>
+        <option value="carpenter">Carpenter</option>
+        <option value="plumber">Plumber</option>
+      </select>
+      <input type="submit" value="Add User" />
+    </form>
+
+    <form id="allUsersForm" action="/users" method="get">
+      <input type="submit" value="Get All Users" />
+    </form>
+
+    <form id="specificUserForm" action="/users" method="get">
+      <label for="id">Specific User ID:</label>
+      <input id="id" type="number" />
+      <input type="submit" value="Find User" />
+    </form>
+
+    <seciton id="users">
+
+    </seciton> -->
+  
+  </section>
+</body>
+</html>
