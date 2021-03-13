@@ -2,28 +2,21 @@ const users = {};
 let lastId = 0;
 
 function index(request, response) {
-  response.writeHead(200, { 'Content-Type': 'application/json' });
-  response.write(JSON.stringify(users));
-  response.end();
+  response.responseData = {status: 200, body: users};
 }
 
 function store(request, response, args) {
   lastId++;
   users[lastId] = args;
 
-  response.writeHead(201, { 'Content-Type': 'application/json' });
-  response.write(JSON.stringify(users[lastId]));
-  response.end();
+  response.responseData = {status: 201, body: users[lastId]};
 }
 
 function show(request, response, args) {
   if (!users[args.id]) {
-    response.writeHead(404);
-    response.end();
+    response.responseData = {status: 404, body: {message: "Could not find user with ID!"}};
   } else {
-    response.writeHead(200, { 'Content-Type': 'application/json' });
-    response.write(JSON.stringify(users[args.id]));
-    response.end();
+    response.responseData = {status: 200, body: users[args.id]};
   }
 }
 

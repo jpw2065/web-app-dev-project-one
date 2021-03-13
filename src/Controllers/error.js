@@ -1,6 +1,5 @@
 const doesNotExist = (request, response) => {
-  response.writeHead(404);
-  response.end();
+  response.responseData = [404];
 };
 
 module.exports.doesNotExist = doesNotExist;

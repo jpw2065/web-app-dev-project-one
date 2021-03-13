@@ -5,21 +5,15 @@ const companyFile = fs.readFileSync(`${__dirname}/../../client/client2.html`);
 const cssFile = fs.readFileSync(`${__dirname}/../../client/style.css`);
 
 const index = (request, response) => {
-  response.writeHead(200, { 'Content-Type': 'text/html' });
-  response.write(indexFile);
-  response.end();
+  response.responseData = {status: 200, body: indexFile, type: 'text/html'};
 };
 
 const companies = (request, response) => {
-  response.writeHead(200, { 'Content-Type': 'text/html' });
-  response.write(companyFile);
-  response.end();
+  response.responseData = {status: 200, body: companyFile, type: 'text/html'};
 };
 
 const css = (request, response) => {
-  response.writeHead(200, { 'Content-Type': 'text/css' });
-  response.write(cssFile);
-  response.end();
+  response.responseData = {status: 200, body: cssFile, type: 'text/css'};
 };
 
 module.exports.index = index;
