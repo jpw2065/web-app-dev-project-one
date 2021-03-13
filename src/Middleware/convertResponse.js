@@ -50,9 +50,9 @@ const outbound = (request, response) => {
     let responseData = response.responseData;
 
     if(!responseData.hasOwnProperty("status")){
-        respnoseData.status = 404; 
+        responseData.status = 404; 
         responseData.body = "{ message: 'Could not find status on response'}";
-        respnoseData.type = "application/json";
+        responseData.type = "application/json";
     }
 
     if(!responseData.hasOwnProperty("type"))

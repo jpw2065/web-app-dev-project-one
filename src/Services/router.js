@@ -9,34 +9,43 @@ const errorController = require('../Controllers/error.js');
 const dneUrl = errorController.doesNotExist;
 
 /**
- * Handle the route if it is either a GET or POST route. We have to use a special setup for POST requests.
+ * Handle the route if it is either a GET or POST route. We have to use a special setup for POST requests where we listen to the response coming in.
  * @param {http.ClientRequest} request - The request into the program.
  * @param {http.ServerResponse} response - The response from the program.
  * @param {array} resolvedRoute - {controller: controllerMethod, args: Arguments passed into the route}
  */
 function handleRoute(request, response, resolvedRoute) {
-  if (request.method === 'POST') {
-    const body = [];
 
-    request.on('error', (err) => {
-      console.dir(err);
-      response.statusCode = 400;
-      response.end();
-    });
+  return new Promise((resolve, reject) => {
+    if (request.method === 'POST') {
+        const body = [];
 
-    request.on('data', (chunk) => {
-      body.push(chunk);
-    });
+        request.on('error', (err) => {
+          console.dir(err);
+          response.responseData = {status: 400};
+        });
 
-    request.on('end', () => {
-      const bodyString = Buffer.concat(body).toString();
-      const bodyParams = query.parse(bodyString);
+        request.on('data', (chunk) => {
+          body.push(chunk);
+        });
 
-      resolvedRoute.controller(request, response, bodyParams);
-    });
-  } else {
-    resolvedRoute.controller(request, response, resolvedRoute.args);
-  }
+        request.on('end', () => {
+          const bodyString = Buffer.concat(body).toString();
+          const bodyParams = query.parse(bodyString);
+
+          resolvedRoute.controller(request, response, bodyParams);
+
+          resolve("Route Found");
+        });
+
+
+
+    } else {
+        resolvedRoute.controller(request, response, resolvedRoute.args);
+        resolve("Route Found");
+    }
+
+  });
 }
 
 /**
@@ -134,7 +143,7 @@ function route(request, response) {
   const parsedUrl = url.parse(request.url);
   const incomingRoute = parsedUrl.pathname;
 
-  handleRoute(request, response, findRoute(request.method, incomingRoute));
+  return handleRoute(request, response, findRoute(request.method, incomingRoute));
 }
 
 module.exports.route = route;

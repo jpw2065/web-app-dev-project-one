@@ -17,9 +17,12 @@ const callMiddlewareStack = (request, response, methodCalledOnMiddleware) => {
 
 const onRequest = (request, response) => {
   callMiddlewareStack(request, response, 'inbound');
-  router.route(request, response);
-  callMiddlewareStack(request, response, 'outbound');
-  response.end();
+
+  router.route(request, response).then((successMessage) => {
+    callMiddlewareStack(request, response, 'outbound');
+    response.end();
+  });
+  
 };
 
 http.createServer(onRequest).listen(port);
