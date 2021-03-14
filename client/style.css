@@ -41,6 +41,13 @@ h6
 }
 
 
+li > a {
+
+  color: var(--text-light);
+
+}
+
+
 nav
 {
   background: var(--background-secondary);
