@@ -67,4 +67,9 @@ section
   color: var(--text-dark);
 }
 
+.form-row
+{
+  margin-bottom: 10px;
+}
+
 
