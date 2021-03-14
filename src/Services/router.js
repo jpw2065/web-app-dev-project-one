@@ -15,36 +15,31 @@ const dneUrl = errorController.doesNotExist;
  * @param {array} resolvedRoute - {controller: controllerMethod, args: Arguments passed into the route}
  */
 function handleRoute(request, response, resolvedRoute) {
-
   return new Promise((resolve, reject) => {
     if (request.method === 'POST') {
-        const body = [];
+      const body = [];
 
-        request.on('error', (err) => {
-          console.dir(err);
-          response.responseData = {status: 400};
-        });
+      request.on('error', (err) => {
+        console.dir(err);
+        response.responseData = { status: 400 };
+      });
 
-        request.on('data', (chunk) => {
-          body.push(chunk);
-        });
+      request.on('data', (chunk) => {
+        body.push(chunk);
+      });
 
-        request.on('end', () => {
-          const bodyString = Buffer.concat(body).toString();
-          const bodyParams = query.parse(bodyString);
+      request.on('end', () => {
+        const bodyString = Buffer.concat(body).toString();
+        const bodyParams = query.parse(bodyString);
 
-          resolvedRoute.controller(request, response, bodyParams);
+        resolvedRoute.controller(request, response, bodyParams);
 
-          resolve("Route Found");
-        });
-
-
-
+        resolve('Route Found');
+      });
     } else {
-        resolvedRoute.controller(request, response, resolvedRoute.args);
-        resolve("Route Found");
+      resolvedRoute.controller(request, response, resolvedRoute.args);
+      resolve('Route Found');
     }
-
   });
 }
 

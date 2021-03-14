@@ -1,5 +1,5 @@
 const inbound = (request, response) => {
-  
+
 };
 
 const outbound = (request, response) => {

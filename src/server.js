@@ -22,7 +22,6 @@ const onRequest = (request, response) => {
     callMiddlewareStack(request, response, 'outbound');
     response.end();
   });
-  
 };
 
 http.createServer(onRequest).listen(port);

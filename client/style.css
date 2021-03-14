@@ -17,13 +17,17 @@ html, body {
   padding: 0;
 }
 
-body{
+main{
+
+  width: 100%;
+  height: 100%;
 
   display: grid;
   grid-template-rows: 100vh;
   grid-template-columns: 12rem auto;
 
   font-family: 'Open Sans', sans-serif;
+
 }
 
 h1,
@@ -37,7 +41,8 @@ h6
 }
 
 
-nav{
+nav
+{
   background: var(--background-secondary);
   color: var(--text-light);
 }
@@ -49,7 +54,8 @@ nav{
 }
 
 
-section{
+section
+{
   background: var(--background-primary);
   color: var(--text-dark);
 }

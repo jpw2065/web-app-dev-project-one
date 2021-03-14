@@ -17,7 +17,7 @@ const routes = [
 
   ['GET', '/style.css', fileController.css],
   ['GET', '/bundle.js', fileController.js],
-  
+
 ];
 
 module.exports.routes = routes;
