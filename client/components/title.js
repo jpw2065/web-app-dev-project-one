@@ -1,4 +1,4 @@
-class Title extends React.Component {
+export class Title extends React.Component {
 
     render() {
       return (
