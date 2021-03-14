@@ -1,10 +1,14 @@
-:root {
+:root
+{
 
-  
+  --background-primary: #f8fafc;
+  --background-secondary: #3490dc;
+  --background-secondary-light: #397fb9;
 
+  --text-light: #FFFFFF;
+  --text-dark: #000000;
 
 }
-
 
 html, body {
   height: 100%;
@@ -13,19 +17,41 @@ html, body {
   padding: 0;
 }
 
-
 body{
 
   display: grid;
   grid-template-rows: 100vh;
   grid-template-columns: 12rem auto;
 
+  font-family: 'Open Sans', sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6
+{
+  font-family: 'Hammersmith One', sans-serif;
 }
 
 
 nav{
-  background: blue;
+  background: var(--background-secondary);
+  color: var(--text-light);
 }
 
+
+.nav-selected
+{
+  background: var(--background-secondary-light);
+}
+
+
+section{
+  background: var(--background-primary);
+  color: var(--text-dark);
+}
 
 

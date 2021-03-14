@@ -4,9 +4,11 @@
   "description": "Vocational labor manager. Acts as a backend to the American Labor Company website.",
   "main": "./src/index.js",
   "scripts": {
-    "start": "node ./src/server.js",
+    "start": "webpack --mode production && node ./src/server.js",
     "pretest": "eslint ./src --fix",
-    "test": "echo \"Tests complete\""
+    "test": "echo \"Tests complete\"",
+    "build": "webpack --mode production",
+    "watch": "webpack --watch"
   },
   "repository": {
     "type": "git",
@@ -26,6 +28,8 @@
   "devDependencies": {
     "eslint": "^7.21.0",
     "eslint-config-airbnb": "^18.2.1",
-    "eslint-plugin-import": "^2.22.1"
+    "eslint-plugin-import": "^2.22.1",
+    "webpack": "^5.25.0",
+    "webpack-cli": "^4.5.0"
   }
 }

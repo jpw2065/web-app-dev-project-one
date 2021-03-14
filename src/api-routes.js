@@ -2,17 +2,17 @@ const userController = require('./Controllers/user.js');
 
 const routes = [
 
-  ['GET', '/users', userController.index],
-  ['POST', '/users', userController.store],
-  ['GET', '/users/{id}', userController.show],
-  // ['PATCH', '/users/{id}', userController.update],
-  // ['DELETE', '/users/{id}', userController.destroy],
+  ['GET', '/api/users', userController.index],
+  ['POST', '/api/users', userController.store],
+  ['GET', '/api/users/{id}', userController.show],
+  // ['PATCH', 'api/users/{id}', userController.update],
+  // ['DELETE', 'api/users/{id}', userController.destroy],
 
-  // ['GET', '/companies', companyController.index],
-  // ['POST', '/companies', companyController.store],
-  // ['GET', '/companies/{id}', companyController.show],
-  // ['PATCH', '/companies/{id}', companyController.update],
-  // ['DELETE', '/companies/{id}', companyController.destroy]
+  // ['GET', 'api/companies', companyController.index],
+  // ['POST', 'api/companies', companyController.store],
+  // ['GET', 'api/companies/{id}', companyController.show],
+  // ['PATCH', 'api/companies/{id}', companyController.update],
+  // ['DELETE', 'api/companies/{id}', companyController.destroy]
 
 ];
 
