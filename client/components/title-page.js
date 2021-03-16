@@ -6,7 +6,7 @@ export class TitlePage extends React.Component {
     render() {
       return (
         <main>
-            <Nav />
+            <Nav select="title-page" />
             <Title />
         </main>
       );

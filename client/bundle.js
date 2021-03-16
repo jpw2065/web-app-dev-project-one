@@ -5,26 +5,24 @@ var __webpack_exports__ = {};
 ;// CONCATENATED MODULE: ./client/components/nav.js
 class Nav extends React.Component {
   render() {
-    var currentLocation = window.location;
-    console.log(currentLocation);
     return /*#__PURE__*/React.createElement("nav", null, /*#__PURE__*/React.createElement("h1", {
       class: "mb-4 mt-3 pl-3"
     }, "VOCA"), /*#__PURE__*/React.createElement("ul", {
       class: "list-inline"
     }, /*#__PURE__*/React.createElement("li", {
-      class: "pl-5 nav-selected"
+      class: this.props.select === "title-page" ? "pl-5 nav-selected" : "pl-4"
     }, /*#__PURE__*/React.createElement("a", {
       href: "/index"
     }, "Home"))), /*#__PURE__*/React.createElement("hr", null), /*#__PURE__*/React.createElement("h5", {
       class: "pl-3"
-    }, "Users"), /*#__PURE__*/React.createElement("ul", {
+    }, "Workers"), /*#__PURE__*/React.createElement("ul", {
       class: "list-inline"
     }, /*#__PURE__*/React.createElement("li", {
-      class: "pl-4"
+      class: this.props.select === "users-page" ? "pl-5 nav-selected" : "pl-4"
     }, /*#__PURE__*/React.createElement("a", {
       href: "/users"
     }, "All")), /*#__PURE__*/React.createElement("li", {
-      class: "pl-4"
+      class: this.props.select === "new-user-page" ? "pl-5 nav-selected" : "pl-4"
     }, /*#__PURE__*/React.createElement("a", {
       href: "/users/new"
     }, "Create"))), /*#__PURE__*/React.createElement("hr", null), /*#__PURE__*/React.createElement("h5", {
@@ -32,11 +30,11 @@ class Nav extends React.Component {
     }, "Companies"), /*#__PURE__*/React.createElement("ul", {
       class: "list-inline"
     }, /*#__PURE__*/React.createElement("li", {
-      class: "pl-4"
+      class: this.props.select === "companies-page" ? "pl-5 nav-selected" : "pl-4"
     }, /*#__PURE__*/React.createElement("a", {
       href: "/companies"
     }, "All")), /*#__PURE__*/React.createElement("li", {
-      class: "pl-4"
+      class: this.props.select === "new-company-page" ? "pl-5 nav-selected" : "pl-4"
     }, /*#__PURE__*/React.createElement("a", {
       href: "/companies/new"
     }, "Create"))));
@@ -52,8 +50,12 @@ class Title extends React.Component {
       class: "text-center"
     }, /*#__PURE__*/React.createElement("h1", {
       class: "display-1"
-    }, "VOCA"), /*#__PURE__*/React.createElement("p", null, "CRM for skilled trade workers."), /*#__PURE__*/React.createElement("button", {
-      class: "btn btn-primary"
+    }, "VOCA"), /*#__PURE__*/React.createElement("p", {
+      class: "mb-4"
+    }, "CRM for skilled trade workers."), /*#__PURE__*/React.createElement("a", {
+      href: "/users",
+      class: "btn btn-primary",
+      role: "button"
     }, "Find Workers")));
   }
 
@@ -63,32 +65,38 @@ class Title extends React.Component {
 
 class TitlePage extends React.Component {
   render() {
-    return /*#__PURE__*/React.createElement("main", null, /*#__PURE__*/React.createElement(Nav, null), /*#__PURE__*/React.createElement(Title, null));
+    return /*#__PURE__*/React.createElement("main", null, /*#__PURE__*/React.createElement(Nav, {
+      select: "title-page"
+    }), /*#__PURE__*/React.createElement(Title, null));
   }
 
 }
 ;// CONCATENATED MODULE: ./client/components/user-form.js
 class UserForm extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.handleChange = e => {
-      this.setState({
-        [e.target.name]: e.target.value
-      });
-    };
+  constructor(...args) {
+    super(...args);
 
     this.handleSubmit = e => {
-      alert("Sup bruh");
-    };
+      let formData = new FormData(e.target);
+      var params = new URLSearchParams();
 
-    this.state = {
-      name: '',
-      email: '',
-      phone: '',
-      trade: '',
-      info: '',
-      resume: ''
+      for (var pair of formData.entries()) {
+        typeof pair[1] == 'string' && params.append(pair[0], pair[1]);
+      }
+
+      params = params.toString();
+      fetch('/api/users', {
+        method: 'POST',
+        // We convert the React state to JSON and send it as the POST body
+        body: params
+      }).then(function (response) {
+        if (response.status == 201) {
+          window.location.href = "/users";
+        }
+
+        return response.json();
+      });
+      e.preventDefault();
     };
   }
 
@@ -109,9 +117,7 @@ class UserForm extends React.Component {
       id: "user-form-name",
       type: "text",
       class: "form-control",
-      name: "name",
-      value: this.state.value,
-      onChange: this.handleChange
+      name: "name"
     })), /*#__PURE__*/React.createElement("div", {
       class: "col"
     }, /*#__PURE__*/React.createElement("label", {
@@ -120,10 +126,7 @@ class UserForm extends React.Component {
       id: "user-form-email",
       type: "email",
       class: "form-control",
-      placeholder: "Email",
-      name: "email",
-      value: this.state.value,
-      onChange: this.handleChange
+      name: "email"
     }))), /*#__PURE__*/React.createElement("div", {
       class: "form-row"
     }, /*#__PURE__*/React.createElement("div", {
@@ -134,10 +137,7 @@ class UserForm extends React.Component {
       id: "user-form-phone",
       type: "tel",
       class: "form-control",
-      placeholder: "Phone Number",
-      name: "phone",
-      value: this.state.value,
-      onChange: this.handleChange
+      name: "phone"
     })), /*#__PURE__*/React.createElement("div", {
       class: "col"
     }, /*#__PURE__*/React.createElement("label", {
@@ -145,10 +145,31 @@ class UserForm extends React.Component {
     }, "Trade:"), /*#__PURE__*/React.createElement("select", {
       id: "user-form-trade",
       class: "form-control",
-      name: "trade",
-      value: this.state.value,
-      onChange: this.handleChange
+      name: "trade"
     }, /*#__PURE__*/React.createElement("option", null, "Bell Hanger"), /*#__PURE__*/React.createElement("option", null, "Boilermaker"), /*#__PURE__*/React.createElement("option", null, "Carpenter"), /*#__PURE__*/React.createElement("option", null, "Carpet Layer"), /*#__PURE__*/React.createElement("option", null, "Dredger"), /*#__PURE__*/React.createElement("option", null, "Electrician"), /*#__PURE__*/React.createElement("option", null, "Elevator Mechanic"), /*#__PURE__*/React.createElement("option", null, "Fencer"), /*#__PURE__*/React.createElement("option", null, "Glazier"), /*#__PURE__*/React.createElement("option", null, "Heavy Equipment Operator"), /*#__PURE__*/React.createElement("option", null, "HVAC Technician"), /*#__PURE__*/React.createElement("option", null, "Insulation"), /*#__PURE__*/React.createElement("option", null, "Ironworker"), /*#__PURE__*/React.createElement("option", null, "Laborer"), /*#__PURE__*/React.createElement("option", null, "Landscaper"), /*#__PURE__*/React.createElement("option", null, "Lineman")))), /*#__PURE__*/React.createElement("div", {
+      class: "form-row"
+    }, /*#__PURE__*/React.createElement("div", {
+      class: "col"
+    }, /*#__PURE__*/React.createElement("label", {
+      for: "user-form-employed"
+    }, "Employed:"), /*#__PURE__*/React.createElement("select", {
+      id: "user-form-employed",
+      class: "form-control",
+      name: "employed"
+    }, /*#__PURE__*/React.createElement("option", {
+      value: "No"
+    }, "No"), /*#__PURE__*/React.createElement("option", {
+      value: "Yes"
+    }, "Yes"))), /*#__PURE__*/React.createElement("div", {
+      class: "col"
+    }, /*#__PURE__*/React.createElement("label", {
+      for: "user-form-employer"
+    }, "Employer:"), /*#__PURE__*/React.createElement("input", {
+      id: "user-form-employer",
+      type: "text",
+      class: "form-control",
+      name: "employer"
+    }))), /*#__PURE__*/React.createElement("div", {
       class: "form-row"
     }, /*#__PURE__*/React.createElement("div", {
       class: "col"
@@ -158,21 +179,7 @@ class UserForm extends React.Component {
       id: "user-form-info",
       class: "form-control",
       rows: "3",
-      placeholdre: "Additional Information",
-      name: "info",
-      value: this.state.value,
-      onChange: this.handleChange
-    })), /*#__PURE__*/React.createElement("div", {
-      class: "col"
-    }, /*#__PURE__*/React.createElement("label", {
-      for: "user-form-resume"
-    }, "Resume:"), /*#__PURE__*/React.createElement("input", {
-      id: "user-form-resume",
-      type: "file",
-      class: "form-control-file",
-      name: "resume",
-      value: this.state.value,
-      onChange: this.handleChange
+      name: "info"
     }))), /*#__PURE__*/React.createElement("div", {
       class: "form-row text-center"
     }, /*#__PURE__*/React.createElement("div", {
@@ -189,16 +196,248 @@ class UserForm extends React.Component {
 
 class NewUserPage extends React.Component {
   render() {
-    return /*#__PURE__*/React.createElement("main", null, /*#__PURE__*/React.createElement(Nav, null), /*#__PURE__*/React.createElement(UserForm, null));
+    return /*#__PURE__*/React.createElement("main", null, /*#__PURE__*/React.createElement(Nav, {
+      select: "new-user-page"
+    }), /*#__PURE__*/React.createElement(UserForm, null));
+  }
+
+}
+;// CONCATENATED MODULE: ./client/components/user-card.js
+class UserCard extends React.Component {
+  Capitalize(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  }
+
+  render() {
+    let employedColor = {};
+    if (this.props.user.employed === "Yes") employedColor.backgroundColor = '#c4ffdb';
+    return /*#__PURE__*/React.createElement("div", {
+      class: "card text-left mb-4 mt-4"
+    }, /*#__PURE__*/React.createElement("div", {
+      class: "card-header font-weight-bold",
+      style: employedColor
+    }, /*#__PURE__*/React.createElement("h4", {
+      class: "mb-2 mt-2"
+    }, this.Capitalize(this.props.user.trade), " Worker")), /*#__PURE__*/React.createElement("div", {
+      class: "card-body"
+    }, /*#__PURE__*/React.createElement("h5", {
+      class: "font-weight-normal"
+    }, this.props.user.name), /*#__PURE__*/React.createElement("div", {
+      class: "row"
+    }, /*#__PURE__*/React.createElement("div", {
+      class: "col-4 text-right p-0"
+    }, /*#__PURE__*/React.createElement("p", {
+      class: "font-weight-bold pr-2"
+    }, "Phone: ")), /*#__PURE__*/React.createElement("div", {
+      class: "col-4 d-flex flex-row justify-content-between p-0"
+    }, /*#__PURE__*/React.createElement("p", null, this.props.user.phone), /*#__PURE__*/React.createElement("p", {
+      class: "font-weight-bold pr-2"
+    }, "Email: ")), /*#__PURE__*/React.createElement("div", {
+      class: "col-4 text-left p-0"
+    }, /*#__PURE__*/React.createElement("p", null, this.props.user.email))), /*#__PURE__*/React.createElement("div", {
+      class: "row"
+    }, /*#__PURE__*/React.createElement("div", {
+      class: "col-4 text-right p-0"
+    }, /*#__PURE__*/React.createElement("p", {
+      class: "font-weight-bold pr-2"
+    }, "Trade: ")), /*#__PURE__*/React.createElement("div", {
+      class: "col-4 d-flex flex-row justify-content-between p-0"
+    }, /*#__PURE__*/React.createElement("p", null, this.props.user.trade), /*#__PURE__*/React.createElement("p", {
+      class: "font-weight-bold pr-2"
+    }, "Resume: ")), /*#__PURE__*/React.createElement("div", {
+      class: "col-4 text-left p-0"
+    }, /*#__PURE__*/React.createElement("p", null, "No"))), /*#__PURE__*/React.createElement("div", {
+      class: "d-flex flex-row justify-content-end"
+    }, /*#__PURE__*/React.createElement("a", {
+      href: '/users/' + this.props.user.id,
+      class: "btn btn-primary mr-3"
+    }, "Profile"), /*#__PURE__*/React.createElement("a", {
+      href: '/users/' + this.props.user.id + '/edit',
+      class: "btn btn-primary mr-3"
+    }, "Edit"))));
+  }
+
+}
+;// CONCATENATED MODULE: ./client/components/users.js
+
+class Users extends React.Component {
+  constructor(...args) {
+    super(...args);
+    this.state = {
+      loading: true,
+      users: []
+    };
+  }
+
+  async componentDidMount() {
+    const url = "/api/users";
+    fetch(url).then(res => res.json()).then(data => {
+      this.setState({
+        users: data,
+        loading: false
+      });
+    }).catch(console.log);
+  }
+
+  render() {
+    let noUsers;
+
+    if (this.state.users.length == 0 && !this.state.loading) {
+      noUsers = true;
+    }
+
+    return /*#__PURE__*/React.createElement("section", {
+      class: "container mt-5 text-center overflow-auto"
+    }, /*#__PURE__*/React.createElement("h1", {
+      class: "mb-2"
+    }, "Workers"), /*#__PURE__*/React.createElement("p", null, "Green = Employed, Grey = Not Employed"), this.state.loading && /*#__PURE__*/React.createElement("p", null, "Loading..."), noUsers && /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("p", {
+      class: "mb-4"
+    }, "No workers found! Add a new Worker to the database."), /*#__PURE__*/React.createElement("a", {
+      href: "/users/new",
+      class: "btn btn-primary",
+      role: "button"
+    }, "Add Workers")), this.state.users.map(user => /*#__PURE__*/React.createElement(UserCard, {
+      user: user
+    })));
+  }
+
+}
+;// CONCATENATED MODULE: ./client/components/users-page.js
+
+
+class UsersPage extends React.Component {
+  render() {
+    return /*#__PURE__*/React.createElement("main", null, /*#__PURE__*/React.createElement(Nav, {
+      select: "users-page"
+    }), /*#__PURE__*/React.createElement(Users, null));
+  }
+
+}
+;// CONCATENATED MODULE: ./client/components/user-pofile.js
+class UserProfile extends React.Component {
+  render() {
+    return /*#__PURE__*/React.createElement("div", {
+      class: "container d-flex flex-column justify-content-center"
+    }, /*#__PURE__*/React.createElement("div", {
+      class: "card text-left mb-4 mt-4"
+    }, /*#__PURE__*/React.createElement("div", {
+      class: "card-header pt-4 pb-4"
+    }, /*#__PURE__*/React.createElement("h1", {
+      class: "font-weight-normal card-title text-center m-0"
+    }, this.props.user.name)), /*#__PURE__*/React.createElement("div", {
+      class: "card-body pt-5 pb-5"
+    }, /*#__PURE__*/React.createElement("h4", {
+      class: "text-center mb-2"
+    }, "Pesonal Information"), /*#__PURE__*/React.createElement("div", {
+      class: "row"
+    }, /*#__PURE__*/React.createElement("div", {
+      class: "col-4 text-right p-0"
+    }, /*#__PURE__*/React.createElement("p", {
+      class: "font-weight-bold pr-2"
+    }, "Phone: ")), /*#__PURE__*/React.createElement("div", {
+      class: "col-4 d-flex flex-row justify-content-between p-0"
+    }, /*#__PURE__*/React.createElement("p", null, this.props.user.phone), /*#__PURE__*/React.createElement("p", {
+      class: "font-weight-bold pr-2"
+    }, "Email: ")), /*#__PURE__*/React.createElement("div", {
+      class: "col-4 text-left p-0"
+    }, /*#__PURE__*/React.createElement("p", null, this.props.user.email))), /*#__PURE__*/React.createElement("div", {
+      class: "row"
+    }, /*#__PURE__*/React.createElement("div", {
+      class: "col-4 text-right p-0"
+    }, /*#__PURE__*/React.createElement("p", {
+      class: "font-weight-bold pr-2"
+    }, "Trade: ")), /*#__PURE__*/React.createElement("div", {
+      class: "col-4 d-flex flex-row justify-content-between p-0"
+    }, /*#__PURE__*/React.createElement("p", null, this.props.user.trade), /*#__PURE__*/React.createElement("p", {
+      class: "font-weight-bold pr-2"
+    }, "Resume: ")), /*#__PURE__*/React.createElement("div", {
+      class: "col-4 text-left p-0"
+    }, /*#__PURE__*/React.createElement("p", null, "No"))), /*#__PURE__*/React.createElement("div", {
+      class: "row"
+    }, /*#__PURE__*/React.createElement("div", {
+      class: "col-4 text-right p-0"
+    }, /*#__PURE__*/React.createElement("p", {
+      class: "font-weight-bold pr-2"
+    }, "Employed: ")), /*#__PURE__*/React.createElement("div", {
+      class: "col-4 d-flex flex-row justify-content-between p-0"
+    }, /*#__PURE__*/React.createElement("p", null, this.props.user.employed), /*#__PURE__*/React.createElement("p", {
+      class: "font-weight-bold pr-2"
+    }, "Employer: ")), /*#__PURE__*/React.createElement("div", {
+      class: "col-4 text-left p-0"
+    }, /*#__PURE__*/React.createElement("p", null, this.props.user.employer))), /*#__PURE__*/React.createElement("h4", {
+      class: "text-center mt-5 mb-2"
+    }, "Additional Information"), /*#__PURE__*/React.createElement("p", {
+      class: "text-center"
+    }, this.props.user.info)), /*#__PURE__*/React.createElement("div", {
+      class: "card-footer pt-4 pb-4 d-flex flex-row justify-content-between"
+    }, /*#__PURE__*/React.createElement("div", null, this.props.user.employed === "Yes" ? /*#__PURE__*/React.createElement("button", {
+      class: "btn btn-primary"
+    }, "Mark Un-employed") : /*#__PURE__*/React.createElement("button", {
+      class: "btn btn-primary"
+    }, "Mark Employed")), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("a", {
+      href: "/users/new",
+      class: "btn btn-primary mr-2",
+      role: "button"
+    }, "Edit"), /*#__PURE__*/React.createElement("button", {
+      class: "btn btn-danger"
+    }, "Delete")))));
+  }
+
+}
+;// CONCATENATED MODULE: ./client/components/loading.js
+class Loading extends React.Component {
+  render() {
+    return /*#__PURE__*/React.createElement("section", {
+      class: "container mt-5 text-center"
+    }, /*#__PURE__*/React.createElement("h1", {
+      class: "mb-2"
+    }, "VOCA"), /*#__PURE__*/React.createElement("p", null, "Loading..."));
+  }
+
+}
+;// CONCATENATED MODULE: ./client/components/user-page.js
+
+
+
+class UserPage extends React.Component {
+  constructor(...args) {
+    super(...args);
+    this.state = {
+      loading: true,
+      user: null
+    };
+  }
+
+  async componentDidMount() {
+    let currentLocation = window.location;
+    console.log(currentLocation.origin + "/api" + currentLocation.pathname);
+    fetch(currentLocation.origin + "/api" + currentLocation.pathname).then(res => res.json()).then(data => {
+      this.setState({
+        user: data,
+        loading: false
+      });
+    }).catch(console.log);
+  }
+
+  render() {
+    return /*#__PURE__*/React.createElement("main", null, /*#__PURE__*/React.createElement(Nav, {
+      select: "users-page"
+    }), !this.state.loading && /*#__PURE__*/React.createElement(UserProfile, {
+      user: this.state.user
+    }));
   }
 
 }
 ;// CONCATENATED MODULE: ./client/components/components.js
 
 
+
+
 window.MyReactComponents = {
   TitlePage: TitlePage,
-  NewUserPage: NewUserPage
+  NewUserPage: NewUserPage,
+  UsersPage: UsersPage,
+  UserPage: UserPage
 };
 /******/ })()
 ;

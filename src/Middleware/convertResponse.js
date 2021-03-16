@@ -40,13 +40,22 @@ const outbound = (request, response) => {
   const { responseData } = response;
 
   if (!responseData.hasOwnProperty('status')) {
-    responseData.status = 404;
-    responseData.body = "{ message: 'Could not find status on response'}";
+    responseData.status = 500;
+    responseData.body = "{ id='Controller did not return a status', message: 'Could not find status on response'}";
     responseData.type = 'application/json';
   }
 
   if (!responseData.hasOwnProperty('type')) {
-    responseData.type = request.headers.accept.split(',')[0];
+    let requestType = request.headers.accept.split(',')[0];
+
+    if(requestType === "*/*")
+    {
+      responseData.type = 'application/json';
+    }
+    else
+    {
+      responseData.type = requestType;
+    }
   }
 
   responseData.body = bodyParse(responseData.body, responseData.type);

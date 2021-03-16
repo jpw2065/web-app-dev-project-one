@@ -6,7 +6,7 @@ export class NewUserPage extends React.Component {
     render() {
       return (
         <main>
-            <Nav />
+            <Nav select="new-user-page" />
             <UserForm />
         </main>
       );

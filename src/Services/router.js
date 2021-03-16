@@ -38,6 +38,7 @@ function handleRoute(request, response, resolvedRoute) {
       });
     } else {
       resolvedRoute.controller(request, response, resolvedRoute.args);
+
       resolve('Route Found');
     }
   });
