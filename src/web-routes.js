@@ -12,10 +12,11 @@ const routes = [
 
   ['GET', '/companies', fileController.companies],
   ['GET', '/companies/new', fileController.newCompany],
-  ['GET', '/companies/{id}', fileController.companies],
+  ['GET', '/companies/{id}', fileController.company],
   ['GET', '/companies/{id}/edit', fileController.editCompany],
 
   ['GET', '/style.css', fileController.css],
+  ['GET', '/logo.svg', fileController.svg],
   ['GET', '/bundle.js', fileController.js],
 
 ];

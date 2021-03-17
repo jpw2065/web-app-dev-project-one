@@ -9,6 +9,16 @@ const errorController = require('../Controllers/error.js');
 
 const dneUrl = errorController.doesNotExist;
 
+
+
+/**
+ * Route any POST, PATCH request
+ * @param {http.ClientRequest} request 
+ * @param {http.ServerResponse} response
+ * @param {array} resolvedRoute - {controller: controllerMethod,
+ *                                       args: Arguments passed into the route}
+ * @returns Promise
+ */
 function routePostOrPatch(request, response, resolvedRoute) {
   return new Promise((resolve) => {
     const body = [];
@@ -36,6 +46,16 @@ function routePostOrPatch(request, response, resolvedRoute) {
   });
 }
 
+
+
+/**
+ * Route any HEAD request
+ * @param {http.ClientRequest} request 
+ * @param {http.ServerResponse} response
+ * @param {array} resolvedRoute - {controller: controllerMethod,
+ *                                       args: Arguments passed into the route}
+ * @returns Promise
+ */
 function routeHead(request, response, resolvedRoute) {
   return new Promise((resolve) => {
     resolvedRoute.controller(request, response, resolvedRoute.args);
@@ -48,6 +68,16 @@ function routeHead(request, response, resolvedRoute) {
   });
 }
 
+
+
+/**
+ * Route any request that is not POST, PATCH, or HEAD
+ * @param {http.ClientRequest} request 
+ * @param {http.ServerResponse} response
+ * @param {array} resolvedRoute - {controller: controllerMethod,
+ *                                       args: Arguments passed into the route}
+ * @returns Promise
+ */
 function routeDefault(request, response, resolvedRoute) {
   return new Promise((resolve) => {
     const queryParameters = url.parse(request.url, true).query;
@@ -60,6 +90,8 @@ function routeDefault(request, response, resolvedRoute) {
     resolve('Route Found');
   });
 }
+
+
 
 /**
  * Handle the route if it is either a GET or POST route. We have to use a special setup
@@ -81,6 +113,8 @@ function handleRoute(request, response, resolvedRoute) {
   }
 }
 
+
+
 /**
  * Clean the route trailing slashes, and the beginning slashes.
  * This is so we can split the route easier in the wildcard methods.
@@ -90,6 +124,8 @@ function handleRoute(request, response, resolvedRoute) {
 function cleanRoute(uncleanedRoute) {
   return uncleanedRoute.replace(/\/+$/, '').replace(/^\/+/, '');
 }
+
+
 
 /**
  * Test to see if the route is matches a wildcard route.
@@ -111,6 +147,8 @@ function isWildcardRoute(templateRoute, incomingRoute) {
   return true;
 }
 
+
+
 /**
  * Test to see if the template ruote matches the incoming route,
  * or if the template route is a wild card route.
@@ -125,6 +163,8 @@ function templateMatchesIncoming(templateRoute, incomingRoute) {
   return templateRouteClean === incomingRouteClean
             || isWildcardRoute(templateRouteClean, incomingRouteClean);
 }
+
+
 
 /**
  * Get the route parameters from the matching template route.
@@ -149,6 +189,8 @@ function getRouteParameters(templateRoute, incomingRoute) {
   return params;
 }
 
+
+
 /**
  * Find the route
  * @param {string} method - Route method (POST, GET)
@@ -170,6 +212,8 @@ function findRoute(method, incomingRoute) {
 
   return { controller: dneUrl, args: {} };
 }
+
+
 
 /**
  * Handle the incoming request.

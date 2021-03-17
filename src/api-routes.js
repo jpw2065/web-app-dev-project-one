@@ -15,7 +15,7 @@ const routes = [
   ['POST', '/api/companies', companyController.store],
   ['GET', '/api/companies/{id}', companyController.show],
   ['PATCH', '/api/companies/{id}', companyController.update],
-  ['DELETE', '/api/companies/{id}', companyController.destroy]
+  ['DELETE', '/api/companies/{id}', companyController.destroy],
 
 ];
 

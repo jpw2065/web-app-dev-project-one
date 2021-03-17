@@ -3,15 +3,36 @@ const validatorService = require('../Services/validation');
 const users = [];
 let lastId = 0;
 
+
+
+/**
+ * Find the user with the id.
+ * @param {string} userId 
+ * @returns 
+ */
 function findUser(userId) {
   const foundUser = users.filter((user) => user.id === userId);
   return foundUser.length > 0 ? foundUser[0] : null;
 }
 
+
+
+/**
+ * Error could not find user.
+ * @param {string} errorMessageText 
+ * @param {http.ServerResponse} response
+ */
 function returnCouldNotFindUser(response) {
   response.responseData = { status: 404, body: { message: 'Could not find user with ID!' } };
 }
 
+
+
+/**
+ * Error message for validation error
+ * @param {string} errorMessageText 
+ * @param {http.ServerResponse} response
+ */
 function validatorError(errorMessageText, response) {
   response.responseData = {
     status: 400,
@@ -19,6 +40,12 @@ function validatorError(errorMessageText, response) {
   };
 }
 
+
+/**
+ * Search for the name in the users array. Filter response
+ * @param {string} name 
+ * @returns 
+ */
 function searchByName(name) {
   return users.filter((user) => user.name.includes(name));
 }

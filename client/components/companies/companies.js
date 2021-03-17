@@ -4,7 +4,7 @@ export class Companies extends React.Component {
 
     state = {
         loading: true,
-        coompanies: []
+        companies: []
     };
 
     constructor(props)
@@ -24,7 +24,7 @@ export class Companies extends React.Component {
         fetch("/api/companies" + params)
             .then(res => res.json())
             .then((data) => {
-                this.setState({ companiess: data, loading: false })
+                this.setState({ companies: data, loading: false })
             })
             .catch(console.log)
     }

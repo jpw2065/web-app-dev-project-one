@@ -6,17 +6,17 @@ export class CompanyForm extends React.Component {
             <div class="form-row">
                 <div class="col">
                     <label form="company-form-contact-name">Contact Name:</label>
-                    <input id="company-form-contact-name" type="text" class="form-control" name="name" defaultValue={this.props.company && this.props.company.contact_name}/>
+                    <input id="company-form-contact-name" type="text" class="form-control" name="contact_name" defaultValue={this.props.company && this.props.company.contact_name}/>
                 </div>
                 <div class="col">
                     <label for="company-form-contact-email">Contact Email:</label>
-                    <input id="company-form-contact-email" type="email" class="form-control" name="email" defaultValue={this.props.company && this.props.company.contact_email}/>
+                    <input id="company-form-contact-email" type="email" class="form-control" name="contact_email" defaultValue={this.props.company && this.props.company.contact_email}/>
                 </div>
             </div>
             <div class="form-row">
                 <div class="col">
                     <label for="company-form-contact-phone">Contact Phone:</label>
-                    <input id="company-form-contact-phone" type="tel" class="form-control" name="phone" defaultValue={this.props.company && this.props.company.contact_phone}/>
+                    <input id="company-form-contact-phone" type="tel" class="form-control" name="contact_phone" defaultValue={this.props.company && this.props.company.contact_phone}/>
                 </div>
                 <div class="col">
                     <label for="company-form-name">Company Name:</label>
@@ -26,7 +26,7 @@ export class CompanyForm extends React.Component {
             <div class="form-row">
                 <div class="col">
                     <label for="company-form-industry">Industry:</label>
-                    <select id="company-form-industry" required class="form-control" name="trade" defaultValue={this.props.company && this.props.company.industry}>
+                    <select id="company-form-industry" required class="form-control" name="industry" defaultValue={this.props.company && this.props.company.industry}>
                         <option>Bell Hanger</option>
                         <option>Boilermaker</option>
                         <option>Carpenter</option>
@@ -61,13 +61,13 @@ export class CompanyForm extends React.Component {
                 </div>
                 <div class="col">
                     <label for="company-form-size">Size (people):</label>
-                    <input id="company-form-size" type="text" required class="form-control" name="employer" defaultValue={this.props.company && this.props.company.size}/>
+                    <input id="company-form-size" type="text" required class="form-control" name="size" defaultValue={this.props.company && this.props.company.size}/>
                 </div>
             </div>
             <div class="form-row">
                 <div class="col">
                     <label for="company-form-address">Address:</label>
-                    <input id="company-form-address" type="text" required class="form-control" name="employer" defaultValue={this.props.company && this.props.company.address}/>
+                    <input id="company-form-address" type="text" required class="form-control" name="address" defaultValue={this.props.company && this.props.company.address}/>
                 </div>
             </div>
             <div class="form-row">

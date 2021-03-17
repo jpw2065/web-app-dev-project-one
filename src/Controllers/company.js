@@ -3,15 +3,36 @@ const validatorService = require('../Services/validation');
 const companies = [];
 let lastId = 0;
 
+
+
+/**
+ * Find the company with the id.
+ * @param {string} userId 
+ * @returns 
+ */
 function findCompany(companyId) {
   const foundCompany = companies.filter((company) => company.id === companyId);
   return foundCompany.length > 0 ? foundCompany[0] : null;
 }
 
+
+
+/**
+ * Error could not find user.
+ * @param {string} errorMessageText 
+ * @param {http.ServerResponse} response
+ */
 function returnCouldNotFindCompany(response) {
   response.responseData = { status: 404, body: { message: 'Could not find company with ID!' } };
 }
 
+
+
+/**
+ * Error message for validation error
+ * @param {string} errorMessageText 
+ * @param {http.ServerResponse} response
+ */
 function validatorError(errorMessageText, response) {
   response.responseData = {
     status: 400,
@@ -19,6 +40,13 @@ function validatorError(errorMessageText, response) {
   };
 }
 
+
+
+/**
+ * Search for the name in the companies array. Filter response
+ * @param {string} name 
+ * @returns 
+ */
 function searchByName(name) {
   return companies.filter((company) => company.name.includes(name));
 }

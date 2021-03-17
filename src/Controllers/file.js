@@ -14,6 +14,7 @@ const editCompanyFile = fs.readFileSync(`${__dirname}/../../client/html/companie
 
 const cssFile = fs.readFileSync(`${__dirname}/../../client/style.css`);
 const jsFile = fs.readFileSync(`${__dirname}/../../client/bundle.js`);
+const svgFile = fs.readFileSync(`${__dirname}/../../client/media/logo.svg`);
 
 const index = (request, response) => {
   response.responseData = { status: 200, body: indexFile, type: 'text/html' };
@@ -59,6 +60,10 @@ const js = (request, response) => {
   response.responseData = { status: 200, body: jsFile, type: 'text/javascript' };
 };
 
+const svg = (request, response) => {
+  response.responseData = { status: 200, body: svgFile, type: 'image/svg+xml' };
+};
+
 module.exports.index = index;
 
 module.exports.user = user;
@@ -73,3 +78,4 @@ module.exports.editCompany = editCompany;
 
 module.exports.css = css;
 module.exports.js = js;
+module.exports.svg = svg;

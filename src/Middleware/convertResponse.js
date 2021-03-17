@@ -1,5 +1,17 @@
+/**
+ * Convert body to JSON.
+ * @param {} body 
+ * @returns 
+ */
 const convertJSON = (body) => JSON.stringify(body);
 
+
+
+/**
+ * Convert body to xml
+ * @param {} body 
+ * @returns 
+ */
 const convertXML = (body) => {
   let xmlString = '<response>';
   const keys = Object.keys(body);
@@ -13,6 +25,12 @@ const convertXML = (body) => {
   return xmlString;
 };
 
+
+/**
+ * Convert body
+ * @param {} body 
+ * @returns 
+ */
 const convertBody = (body) => {
   let parsedBody = body;
   if (!(body instanceof Buffer) && !(typeof body === 'string')) {
@@ -22,6 +40,14 @@ const convertBody = (body) => {
   return parsedBody;
 };
 
+
+
+/**
+ * Convert the body to a specific type.
+ * @param {} body 
+ * @param {string} type 
+ * @returns 
+ */
 const bodyParse = (body, type) => {
   switch (type) {
     case 'application/json':
@@ -33,9 +59,20 @@ const bodyParse = (body, type) => {
   }
 };
 
+
+
+
 const inbound = () => {
 };
 
+
+/**
+ * Outbound method for the convert response middleware.
+ * Convert the data we are sending out to either XML, or JSON.
+ * (I do not like this method it is very messy! If I had more time I would clean it up.)
+ * @param {http.ClientRequest} request
+ * @param {http.ServerResponse} response
+ */
 const outbound = (request, response) => {
   const { responseData } = response;
 
