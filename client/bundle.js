@@ -2,7 +2,7 @@
 /******/ 	"use strict";
 var __webpack_exports__ = {};
 
-;// CONCATENATED MODULE: ./client/components/nav.js
+;// CONCATENATED MODULE: ./client/components/universal/nav.js
 class Nav extends React.Component {
   render() {
     return /*#__PURE__*/React.createElement("nav", null, /*#__PURE__*/React.createElement("h1", {
@@ -41,7 +41,7 @@ class Nav extends React.Component {
   }
 
 }
-;// CONCATENATED MODULE: ./client/components/title.js
+;// CONCATENATED MODULE: ./client/components/universal/title.js
 class Title extends React.Component {
   render() {
     return /*#__PURE__*/React.createElement("div", {
@@ -60,7 +60,7 @@ class Title extends React.Component {
   }
 
 }
-;// CONCATENATED MODULE: ./client/components/title-page.js
+;// CONCATENATED MODULE: ./client/components/pages/title-page.js
 
 
 class TitlePage extends React.Component {
@@ -71,8 +71,109 @@ class TitlePage extends React.Component {
   }
 
 }
-;// CONCATENATED MODULE: ./client/components/user-form.js
+;// CONCATENATED MODULE: ./client/components/users/user-form.js
 class UserForm extends React.Component {
+  render() {
+    return /*#__PURE__*/React.createElement("form", {
+      onSubmit: this.props.onSubmit
+    }, /*#__PURE__*/React.createElement("div", {
+      class: "form-row"
+    }, /*#__PURE__*/React.createElement("div", {
+      class: "col"
+    }, /*#__PURE__*/React.createElement("label", {
+      form: "user-form-name"
+    }, "Name:"), /*#__PURE__*/React.createElement("input", {
+      id: "user-form-name",
+      required: true,
+      type: "text",
+      class: "form-control",
+      name: "name",
+      defaultValue: this.props.user && this.props.user.name
+    })), /*#__PURE__*/React.createElement("div", {
+      class: "col"
+    }, /*#__PURE__*/React.createElement("label", {
+      for: "user-form-email"
+    }, "Email:"), /*#__PURE__*/React.createElement("input", {
+      id: "user-form-email",
+      required: true,
+      type: "email",
+      class: "form-control",
+      name: "email",
+      defaultValue: this.props.user && this.props.user.email
+    }))), /*#__PURE__*/React.createElement("div", {
+      class: "form-row"
+    }, /*#__PURE__*/React.createElement("div", {
+      class: "col"
+    }, /*#__PURE__*/React.createElement("label", {
+      for: "user-form-phone"
+    }, "Phone:"), /*#__PURE__*/React.createElement("input", {
+      id: "user-form-phone",
+      required: true,
+      type: "tel",
+      class: "form-control",
+      name: "phone",
+      defaultValue: this.props.user && this.props.user.phone
+    })), /*#__PURE__*/React.createElement("div", {
+      class: "col"
+    }, /*#__PURE__*/React.createElement("label", {
+      for: "user-form-trade"
+    }, "Trade:"), /*#__PURE__*/React.createElement("select", {
+      id: "user-form-trade",
+      required: true,
+      class: "form-control",
+      name: "trade",
+      defaultValue: this.props.user && this.props.user.trade
+    }, /*#__PURE__*/React.createElement("option", null, "Bell Hanger"), /*#__PURE__*/React.createElement("option", null, "Boilermaker"), /*#__PURE__*/React.createElement("option", null, "Carpenter"), /*#__PURE__*/React.createElement("option", null, "Carpet Layer"), /*#__PURE__*/React.createElement("option", null, "Dredger"), /*#__PURE__*/React.createElement("option", null, "Electrician"), /*#__PURE__*/React.createElement("option", null, "Elevator Mechanic"), /*#__PURE__*/React.createElement("option", null, "Fencer"), /*#__PURE__*/React.createElement("option", null, "Glazier"), /*#__PURE__*/React.createElement("option", null, "Heavy Equipment Operator"), /*#__PURE__*/React.createElement("option", null, "HVAC Technician"), /*#__PURE__*/React.createElement("option", null, "Insulation"), /*#__PURE__*/React.createElement("option", null, "Ironworker"), /*#__PURE__*/React.createElement("option", null, "Laborer"), /*#__PURE__*/React.createElement("option", null, "Landscaper"), /*#__PURE__*/React.createElement("option", null, "Lineman")))), /*#__PURE__*/React.createElement("div", {
+      class: "form-row"
+    }, /*#__PURE__*/React.createElement("div", {
+      class: "col"
+    }, /*#__PURE__*/React.createElement("label", {
+      for: "user-form-employed"
+    }, "Employed:"), /*#__PURE__*/React.createElement("select", {
+      id: "user-form-employed",
+      class: "form-control",
+      name: "employed",
+      defaultValue: this.props.user && this.props.user.employed
+    }, /*#__PURE__*/React.createElement("option", {
+      value: "No"
+    }, "No"), /*#__PURE__*/React.createElement("option", {
+      value: "Yes"
+    }, "Yes"))), /*#__PURE__*/React.createElement("div", {
+      class: "col"
+    }, /*#__PURE__*/React.createElement("label", {
+      for: "user-form-employer"
+    }, "Employer:"), /*#__PURE__*/React.createElement("input", {
+      id: "user-form-employer",
+      type: "text",
+      class: "form-control",
+      name: "employer",
+      defaultValue: this.props.user && this.props.user.employer
+    }))), /*#__PURE__*/React.createElement("div", {
+      class: "form-row"
+    }, /*#__PURE__*/React.createElement("div", {
+      class: "col"
+    }, /*#__PURE__*/React.createElement("label", {
+      for: "user-form-info"
+    }, "Additional Info"), /*#__PURE__*/React.createElement("textarea", {
+      id: "user-form-info",
+      class: "form-control",
+      rows: "3",
+      name: "info",
+      defaultValue: this.props.user && this.props.user.info
+    }))), /*#__PURE__*/React.createElement("div", {
+      class: "form-row text-center"
+    }, /*#__PURE__*/React.createElement("div", {
+      class: "col"
+    }, /*#__PURE__*/React.createElement("button", {
+      type: "submit",
+      class: "btn btn-primary"
+    }, "Submit"))));
+  }
+
+}
+;// CONCATENATED MODULE: ./client/components/users/user-new.js
+
+class UserNew extends React.Component {
   constructor(...args) {
     super(...args);
 
@@ -105,104 +206,92 @@ class UserForm extends React.Component {
       class: "container d-flex flex-column justify-content-center"
     }, /*#__PURE__*/React.createElement("h1", {
       class: "text-center mb-2"
-    }, "New Worker"), /*#__PURE__*/React.createElement("form", {
+    }, "New Worker"), /*#__PURE__*/React.createElement(UserForm, {
       onSubmit: this.handleSubmit
-    }, /*#__PURE__*/React.createElement("div", {
-      class: "form-row"
-    }, /*#__PURE__*/React.createElement("div", {
-      class: "col"
-    }, /*#__PURE__*/React.createElement("label", {
-      form: "user-form-name"
-    }, "Name:"), /*#__PURE__*/React.createElement("input", {
-      id: "user-form-name",
-      type: "text",
-      class: "form-control",
-      name: "name"
-    })), /*#__PURE__*/React.createElement("div", {
-      class: "col"
-    }, /*#__PURE__*/React.createElement("label", {
-      for: "user-form-email"
-    }, "Email:"), /*#__PURE__*/React.createElement("input", {
-      id: "user-form-email",
-      type: "email",
-      class: "form-control",
-      name: "email"
-    }))), /*#__PURE__*/React.createElement("div", {
-      class: "form-row"
-    }, /*#__PURE__*/React.createElement("div", {
-      class: "col"
-    }, /*#__PURE__*/React.createElement("label", {
-      for: "user-form-phone"
-    }, "Phone:"), /*#__PURE__*/React.createElement("input", {
-      id: "user-form-phone",
-      type: "tel",
-      class: "form-control",
-      name: "phone"
-    })), /*#__PURE__*/React.createElement("div", {
-      class: "col"
-    }, /*#__PURE__*/React.createElement("label", {
-      for: "user-form-trade"
-    }, "Trade:"), /*#__PURE__*/React.createElement("select", {
-      id: "user-form-trade",
-      class: "form-control",
-      name: "trade"
-    }, /*#__PURE__*/React.createElement("option", null, "Bell Hanger"), /*#__PURE__*/React.createElement("option", null, "Boilermaker"), /*#__PURE__*/React.createElement("option", null, "Carpenter"), /*#__PURE__*/React.createElement("option", null, "Carpet Layer"), /*#__PURE__*/React.createElement("option", null, "Dredger"), /*#__PURE__*/React.createElement("option", null, "Electrician"), /*#__PURE__*/React.createElement("option", null, "Elevator Mechanic"), /*#__PURE__*/React.createElement("option", null, "Fencer"), /*#__PURE__*/React.createElement("option", null, "Glazier"), /*#__PURE__*/React.createElement("option", null, "Heavy Equipment Operator"), /*#__PURE__*/React.createElement("option", null, "HVAC Technician"), /*#__PURE__*/React.createElement("option", null, "Insulation"), /*#__PURE__*/React.createElement("option", null, "Ironworker"), /*#__PURE__*/React.createElement("option", null, "Laborer"), /*#__PURE__*/React.createElement("option", null, "Landscaper"), /*#__PURE__*/React.createElement("option", null, "Lineman")))), /*#__PURE__*/React.createElement("div", {
-      class: "form-row"
-    }, /*#__PURE__*/React.createElement("div", {
-      class: "col"
-    }, /*#__PURE__*/React.createElement("label", {
-      for: "user-form-employed"
-    }, "Employed:"), /*#__PURE__*/React.createElement("select", {
-      id: "user-form-employed",
-      class: "form-control",
-      name: "employed"
-    }, /*#__PURE__*/React.createElement("option", {
-      value: "No"
-    }, "No"), /*#__PURE__*/React.createElement("option", {
-      value: "Yes"
-    }, "Yes"))), /*#__PURE__*/React.createElement("div", {
-      class: "col"
-    }, /*#__PURE__*/React.createElement("label", {
-      for: "user-form-employer"
-    }, "Employer:"), /*#__PURE__*/React.createElement("input", {
-      id: "user-form-employer",
-      type: "text",
-      class: "form-control",
-      name: "employer"
-    }))), /*#__PURE__*/React.createElement("div", {
-      class: "form-row"
-    }, /*#__PURE__*/React.createElement("div", {
-      class: "col"
-    }, /*#__PURE__*/React.createElement("label", {
-      for: "user-form-info"
-    }, "Additional Info"), /*#__PURE__*/React.createElement("textarea", {
-      id: "user-form-info",
-      class: "form-control",
-      rows: "3",
-      name: "info"
-    }))), /*#__PURE__*/React.createElement("div", {
-      class: "form-row text-center"
-    }, /*#__PURE__*/React.createElement("div", {
-      class: "col"
-    }, /*#__PURE__*/React.createElement("button", {
-      type: "submit",
-      class: "btn btn-primary"
-    }, "Submit")))));
+    }));
   }
 
 }
-;// CONCATENATED MODULE: ./client/components/new-user-page.js
+;// CONCATENATED MODULE: ./client/components/pages/new-user-page.js
 
 
 class NewUserPage extends React.Component {
   render() {
     return /*#__PURE__*/React.createElement("main", null, /*#__PURE__*/React.createElement(Nav, {
       select: "new-user-page"
-    }), /*#__PURE__*/React.createElement(UserForm, null));
+    }), /*#__PURE__*/React.createElement(UserNew, null));
   }
 
 }
-;// CONCATENATED MODULE: ./client/components/user-card.js
+;// CONCATENATED MODULE: ./client/components/users/user-edit.js
+
+class UserEdit extends React.Component {
+  constructor(...args) {
+    super(...args);
+    this.state = {
+      loading: true,
+      user: null
+    };
+
+    this.handleSubmit = e => {
+      let formData = new FormData(e.target);
+      let currentLocation = window.location;
+      let userEndpoint = currentLocation.origin + "/api" + currentLocation.pathname.replace("/edit", "");
+      var params = new URLSearchParams();
+
+      for (var pair of formData.entries()) {
+        typeof pair[1] == 'string' && params.append(pair[0], pair[1]);
+      }
+
+      params = params.toString();
+      fetch(userEndpoint, {
+        method: 'PATCH',
+        body: params
+      }).then(function (response) {
+        if (response.status == 201) {
+          window.location.href = currentLocation.pathname.replace("/edit", "");
+        }
+
+        return response.json();
+      });
+      e.preventDefault();
+    };
+  }
+
+  async componentDidMount() {
+    let currentLocation = window.location;
+    fetch(currentLocation.origin + "/api" + currentLocation.pathname.replace("/edit", "")).then(res => res.json()).then(data => {
+      this.setState({
+        user: data,
+        loading: false
+      });
+    }).catch(console.log);
+  }
+
+  render() {
+    return /*#__PURE__*/React.createElement("div", {
+      class: "container d-flex flex-column justify-content-center"
+    }, !this.state.loading && /*#__PURE__*/React.createElement("h1", {
+      class: "text-center mb-2"
+    }, "Edit Worker : ", this.state.user.name), !this.state.loading && /*#__PURE__*/React.createElement(UserForm, {
+      onSubmit: this.handleSubmit,
+      user: this.state.user
+    }));
+  }
+
+}
+;// CONCATENATED MODULE: ./client/components/pages/edit-user-page.js
+
+
+class EditUserPage extends React.Component {
+  render() {
+    return /*#__PURE__*/React.createElement("main", null, /*#__PURE__*/React.createElement(Nav, {
+      select: "users-page"
+    }), /*#__PURE__*/React.createElement(UserEdit, null));
+  }
+
+}
+;// CONCATENATED MODULE: ./client/components/users/user-card.js
 class UserCard extends React.Component {
   Capitalize(str) {
     return str.charAt(0).toUpperCase() + str.slice(1);
@@ -258,25 +347,33 @@ class UserCard extends React.Component {
   }
 
 }
-;// CONCATENATED MODULE: ./client/components/users.js
+;// CONCATENATED MODULE: ./client/components/users/users.js
 
 class Users extends React.Component {
-  constructor(...args) {
-    super(...args);
+  constructor(props) {
+    super(props);
     this.state = {
       loading: true,
       users: []
     };
+    this.onInputChange = this.onInputChange.bind(this);
   }
 
   async componentDidMount() {
-    const url = "/api/users";
-    fetch(url).then(res => res.json()).then(data => {
+    this.searchUsers("");
+  }
+
+  searchUsers(params) {
+    fetch("/api/users" + params).then(res => res.json()).then(data => {
       this.setState({
         users: data,
         loading: false
       });
     }).catch(console.log);
+  }
+
+  onInputChange(event) {
+    this.searchUsers("?search=" + event.target.value);
   }
 
   render() {
@@ -290,7 +387,12 @@ class Users extends React.Component {
       class: "container mt-5 text-center overflow-auto"
     }, /*#__PURE__*/React.createElement("h1", {
       class: "mb-2"
-    }, "Workers"), /*#__PURE__*/React.createElement("p", null, "Green = Employed, Grey = Not Employed"), this.state.loading && /*#__PURE__*/React.createElement("p", null, "Loading..."), noUsers && /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("p", {
+    }, "Workers"), /*#__PURE__*/React.createElement("p", null, "Green = Employed, Grey = Not Employed"), !this.state.loading && /*#__PURE__*/React.createElement("input", {
+      class: "mb-3",
+      placeholder: "Search Name...",
+      type: "text",
+      onChange: this.onInputChange
+    }), this.state.loading && /*#__PURE__*/React.createElement("p", null, "Loading..."), noUsers && /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("p", {
       class: "mb-4"
     }, "No workers found! Add a new Worker to the database."), /*#__PURE__*/React.createElement("a", {
       href: "/users/new",
@@ -302,7 +404,7 @@ class Users extends React.Component {
   }
 
 }
-;// CONCATENATED MODULE: ./client/components/users-page.js
+;// CONCATENATED MODULE: ./client/components/pages/users-page.js
 
 
 class UsersPage extends React.Component {
@@ -313,8 +415,57 @@ class UsersPage extends React.Component {
   }
 
 }
-;// CONCATENATED MODULE: ./client/components/user-pofile.js
+;// CONCATENATED MODULE: ./client/components/users/user-pofile.js
 class UserProfile extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      user: null
+    };
+    this.user = props.user;
+    this.state.user = props.user;
+    this.setEmployed = this.setEmployed.bind(this);
+    this.setUnemployed = this.setUnemployed.bind(this);
+    this.setEmployedState = this.setEmployedState.bind(this);
+  }
+
+  setEmployedState(employedState) {
+    this.setState(prevState => {
+      let user = Object.assign({}, prevState.user);
+      user.employed = employedState;
+      return {
+        user
+      };
+    });
+  }
+
+  setEmployed() {
+    this.setEmployedState("Yes");
+    this.edit("employed=Yes");
+  }
+
+  setUnemployed() {
+    this.setEmployedState("No");
+    this.edit("employed=No");
+  }
+
+  edit(params) {
+    let currentLocation = window.location;
+    fetch(currentLocation.origin + "/api" + currentLocation.pathname, {
+      method: 'PATCH',
+      body: params
+    });
+  }
+
+  delete() {
+    let currentLocation = window.location;
+    fetch(currentLocation.origin + "/api" + currentLocation.pathname, {
+      method: 'DELETE'
+    }).then(() => {
+      window.location.href = "/users";
+    });
+  }
+
   render() {
     return /*#__PURE__*/React.createElement("div", {
       class: "container d-flex flex-column justify-content-center"
@@ -324,7 +475,7 @@ class UserProfile extends React.Component {
       class: "card-header pt-4 pb-4"
     }, /*#__PURE__*/React.createElement("h1", {
       class: "font-weight-normal card-title text-center m-0"
-    }, this.props.user.name)), /*#__PURE__*/React.createElement("div", {
+    }, this.state.user.name)), /*#__PURE__*/React.createElement("div", {
       class: "card-body pt-5 pb-5"
     }, /*#__PURE__*/React.createElement("h4", {
       class: "text-center mb-2"
@@ -336,11 +487,11 @@ class UserProfile extends React.Component {
       class: "font-weight-bold pr-2"
     }, "Phone: ")), /*#__PURE__*/React.createElement("div", {
       class: "col-4 d-flex flex-row justify-content-between p-0"
-    }, /*#__PURE__*/React.createElement("p", null, this.props.user.phone), /*#__PURE__*/React.createElement("p", {
+    }, /*#__PURE__*/React.createElement("p", null, this.state.user.phone), /*#__PURE__*/React.createElement("p", {
       class: "font-weight-bold pr-2"
     }, "Email: ")), /*#__PURE__*/React.createElement("div", {
       class: "col-4 text-left p-0"
-    }, /*#__PURE__*/React.createElement("p", null, this.props.user.email))), /*#__PURE__*/React.createElement("div", {
+    }, /*#__PURE__*/React.createElement("p", null, this.state.user.email))), /*#__PURE__*/React.createElement("div", {
       class: "row"
     }, /*#__PURE__*/React.createElement("div", {
       class: "col-4 text-right p-0"
@@ -348,7 +499,7 @@ class UserProfile extends React.Component {
       class: "font-weight-bold pr-2"
     }, "Trade: ")), /*#__PURE__*/React.createElement("div", {
       class: "col-4 d-flex flex-row justify-content-between p-0"
-    }, /*#__PURE__*/React.createElement("p", null, this.props.user.trade), /*#__PURE__*/React.createElement("p", {
+    }, /*#__PURE__*/React.createElement("p", null, this.state.user.trade), /*#__PURE__*/React.createElement("p", {
       class: "font-weight-bold pr-2"
     }, "Resume: ")), /*#__PURE__*/React.createElement("div", {
       class: "col-4 text-left p-0"
@@ -360,43 +511,34 @@ class UserProfile extends React.Component {
       class: "font-weight-bold pr-2"
     }, "Employed: ")), /*#__PURE__*/React.createElement("div", {
       class: "col-4 d-flex flex-row justify-content-between p-0"
-    }, /*#__PURE__*/React.createElement("p", null, this.props.user.employed), /*#__PURE__*/React.createElement("p", {
+    }, /*#__PURE__*/React.createElement("p", null, this.state.user.employed), /*#__PURE__*/React.createElement("p", {
       class: "font-weight-bold pr-2"
     }, "Employer: ")), /*#__PURE__*/React.createElement("div", {
       class: "col-4 text-left p-0"
-    }, /*#__PURE__*/React.createElement("p", null, this.props.user.employer))), /*#__PURE__*/React.createElement("h4", {
+    }, /*#__PURE__*/React.createElement("p", null, this.state.user.employer))), /*#__PURE__*/React.createElement("h4", {
       class: "text-center mt-5 mb-2"
     }, "Additional Information"), /*#__PURE__*/React.createElement("p", {
       class: "text-center"
-    }, this.props.user.info)), /*#__PURE__*/React.createElement("div", {
+    }, this.state.user.info)), /*#__PURE__*/React.createElement("div", {
       class: "card-footer pt-4 pb-4 d-flex flex-row justify-content-between"
-    }, /*#__PURE__*/React.createElement("div", null, this.props.user.employed === "Yes" ? /*#__PURE__*/React.createElement("button", {
-      class: "btn btn-primary"
+    }, /*#__PURE__*/React.createElement("div", null, this.state.user.employed === "Yes" ? /*#__PURE__*/React.createElement("button", {
+      class: "btn btn-primary",
+      onClick: () => this.setUnemployed()
     }, "Mark Un-employed") : /*#__PURE__*/React.createElement("button", {
-      class: "btn btn-primary"
+      class: "btn btn-primary",
+      onClick: () => this.setEmployed()
     }, "Mark Employed")), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("a", {
-      href: "/users/new",
+      href: "/users/" + this.state.user.id + "/edit",
       class: "btn btn-primary mr-2",
       role: "button"
     }, "Edit"), /*#__PURE__*/React.createElement("button", {
-      class: "btn btn-danger"
+      class: "btn btn-danger",
+      onClick: () => this.delete()
     }, "Delete")))));
   }
 
 }
-;// CONCATENATED MODULE: ./client/components/loading.js
-class Loading extends React.Component {
-  render() {
-    return /*#__PURE__*/React.createElement("section", {
-      class: "container mt-5 text-center"
-    }, /*#__PURE__*/React.createElement("h1", {
-      class: "mb-2"
-    }, "VOCA"), /*#__PURE__*/React.createElement("p", null, "Loading..."));
-  }
-
-}
-;// CONCATENATED MODULE: ./client/components/user-page.js
-
+;// CONCATENATED MODULE: ./client/components/pages/user-page.js
 
 
 class UserPage extends React.Component {
@@ -410,7 +552,6 @@ class UserPage extends React.Component {
 
   async componentDidMount() {
     let currentLocation = window.location;
-    console.log(currentLocation.origin + "/api" + currentLocation.pathname);
     fetch(currentLocation.origin + "/api" + currentLocation.pathname).then(res => res.json()).then(data => {
       this.setState({
         user: data,
@@ -433,9 +574,11 @@ class UserPage extends React.Component {
 
 
 
+
 window.MyReactComponents = {
   TitlePage: TitlePage,
   NewUserPage: NewUserPage,
+  EditUserPage: EditUserPage,
   UsersPage: UsersPage,
   UserPage: UserPage
 };

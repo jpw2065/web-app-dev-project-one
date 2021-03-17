@@ -1,13 +1,69 @@
 
 export class UserProfile extends React.Component {
 
+    state = {
+        user: null
+    };
+
+    constructor(props)
+    {
+        super(props);
+        this.user = props.user;
+        this.state.user = props.user;
+
+        this.setEmployed = this.setEmployed.bind(this);
+        this.setUnemployed = this.setUnemployed.bind(this);
+        this.setEmployedState = this.setEmployedState.bind(this);
+    }
+
+    setEmployedState(employedState)
+    {
+        this.setState(prevState => {
+            let user = Object.assign({}, prevState.user); 
+            user.employed = employedState;                                
+            return { user };
+        })
+    }
+
+    setEmployed()
+    {
+        this.setEmployedState("Yes");
+        this.edit("employed=Yes");
+    }
+
+    setUnemployed()
+    {
+        this.setEmployedState("No");
+        this.edit("employed=No");
+    }
+
+    edit(params)
+    {
+        let currentLocation = window.location;
+       fetch(currentLocation.origin + "/api" + currentLocation.pathname, {
+            method: 'PATCH',
+            body: params
+        });
+    }
+
+
+    delete()
+    {
+        let currentLocation = window.location;
+       fetch(currentLocation.origin + "/api" + currentLocation.pathname, {
+            method: 'DELETE'
+        }).then(() => {
+            window.location.href = "/users"
+        });
+    }
+
     render() {
       return (
         <div class="container d-flex flex-column justify-content-center">
 
             <div class="card text-left mb-4 mt-4">
                 <div class="card-header pt-4 pb-4">
-                    <h1 class="font-weight-normal card-title text-center m-0">{this.props.user.name}</h1>
+                    <h1 class="font-weight-normal card-title text-center m-0">{this.state.user.name}</h1>
                 </div>
 
                 <div class="card-body pt-5 pb-5">
@@ -18,12 +74,12 @@ export class UserProfile extends React.Component {
                         </div>
 
                         <div class="col-4 d-flex flex-row justify-content-between p-0">
-                            <p>{this.props.user.phone}</p>
+                            <p>{this.state.user.phone}</p>
                             <p class="font-weight-bold pr-2">Email: </p>
                         </div>
 
                         <div class="col-4 text-left p-0">
-                            <p>{this.props.user.email}</p>
+                            <p>{this.state.user.email}</p>
                         </div>
                     </div>
 
@@ -33,7 +89,7 @@ export class UserProfile extends React.Component {
                         </div>
 
                         <div class="col-4 d-flex flex-row justify-content-between p-0">
-                            <p>{this.props.user.trade}</p>
+                            <p>{this.state.user.trade}</p>
                             <p class="font-weight-bold pr-2">Resume: </p>
                         </div>
 
@@ -48,26 +104,26 @@ export class UserProfile extends React.Component {
                         </div>
 
                         <div class="col-4 d-flex flex-row justify-content-between p-0">
-                            <p>{this.props.user.employed}</p>
+                            <p>{this.state.user.employed}</p>
                             <p class="font-weight-bold pr-2">Employer: </p>
                         </div>
 
                         <div class="col-4 text-left p-0">
-                            <p>{this.props.user.employer}</p>
+                            <p>{this.state.user.employer}</p>
                         </div>
                     </div>
 
                     <h4 class="text-center mt-5 mb-2">Additional Information</h4>
-                    <p class="text-center">{this.props.user.info}</p>
+                    <p class="text-center">{this.state.user.info}</p>
                 </div>
 
                 <div class="card-footer pt-4 pb-4 d-flex flex-row justify-content-between">
                     <div>
-                        {this.props.user.employed === "Yes" ? (<button class="btn btn-primary">Mark Un-employed</button>) : (<button class="btn btn-primary">Mark Employed</button>) }
+                        {this.state.user.employed === "Yes" ? (<button class="btn btn-primary" onClick={() => this.setUnemployed() }>Mark Un-employed</button>) : (<button class="btn btn-primary" onClick={() => this.setEmployed() }>Mark Employed</button>) }
                     </div>  
                     <div>
-                        <a href="/users/new" class="btn btn-primary mr-2" role="button">Edit</a>
-                        <button class="btn btn-danger">Delete</button>
+                        <a href={ "/users/" + this.state.user.id + "/edit" } class="btn btn-primary mr-2" role="button">Edit</a>
+                        <button class="btn btn-danger" onClick={() => this.delete() }>Delete</button>
                     </div>
                 </div>
             </div>

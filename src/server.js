@@ -1,12 +1,11 @@
 const http = require('http');
 const router = require('./Services/router.js');
+const convertReponseMiddleware = require('./Middleware/convertResponse.js');
 
 const port = process.env.PORT || process.env.NODE_PORT || 3000;
 
 const middlewareStack = [
-  require('./Middleware/addHeaders.js'),
-  require('./Middleware/parseInputs.js'),
-  require('./Middleware/convertResponse.js'),
+  convertReponseMiddleware,
 ];
 
 const callMiddlewareStack = (request, response, methodCalledOnMiddleware) => {
@@ -18,7 +17,7 @@ const callMiddlewareStack = (request, response, methodCalledOnMiddleware) => {
 const onRequest = (request, response) => {
   callMiddlewareStack(request, response, 'inbound');
 
-  router.route(request, response).then((successMessage) => {
+  router.route(request, response).then(() => {
     callMiddlewareStack(request, response, 'outbound');
     response.end();
   });

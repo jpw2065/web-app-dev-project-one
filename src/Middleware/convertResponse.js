@@ -1,6 +1,6 @@
-const parsedJSON = (body) => JSON.stringify(body);
+const convertJSON = (body) => JSON.stringify(body);
 
-const parsedXML = (body) => {
+const convertXML = (body) => {
   let xmlString = '<response>';
   const keys = Object.keys(body);
 
@@ -13,55 +13,61 @@ const parsedXML = (body) => {
   return xmlString;
 };
 
-const parsedBody = (body) => {
+const convertBody = (body) => {
+  let parsedBody = body;
   if (!(body instanceof Buffer) && !(typeof body === 'string')) {
-    body = parsedJSON(body);
+    parsedBody = convertJSON(body);
   }
 
-  return body;
+  return parsedBody;
 };
 
 const bodyParse = (body, type) => {
   switch (type) {
     case 'application/json':
-      return parsedJSON(body);
+      return convertJSON(body);
     case 'application/xml':
-      return parsedXML(body);
+      return convertXML(body);
     default:
-      return parsedBody(body);
+      return convertBody(body);
   }
 };
 
-const inbound = (request, response) => {
-
+const inbound = () => {
 };
 
 const outbound = (request, response) => {
   const { responseData } = response;
 
-  if (!responseData.hasOwnProperty('status')) {
+  if (!Object.prototype.hasOwnProperty.call(responseData, 'status')) {
     responseData.status = 500;
     responseData.body = "{ id='Controller did not return a status', message: 'Could not find status on response'}";
     responseData.type = 'application/json';
   }
 
-  if (!responseData.hasOwnProperty('type')) {
-    let requestType = request.headers.accept.split(',')[0];
+  if (!Object.prototype.hasOwnProperty.call(responseData, 'type')) {
+    const requestType = request.headers.accept.split(',')[0];
 
-    if(requestType === "*/*")
-    {
+    if (requestType === '*/*') {
       responseData.type = 'application/json';
-    }
-    else
-    {
+    } else {
       responseData.type = requestType;
     }
   }
 
-  responseData.body = bodyParse(responseData.body, responseData.type);
+  let headers = { 'Content-Type': responseData.type };
+  if (Object.prototype.hasOwnProperty.call(responseData, 'header')) {
+    headers = {
+      ...headers,
+      ...responseData.header,
+    };
+  }
 
-  response.writeHead(responseData.status, { 'Content-Type': responseData.type });
-  response.write(responseData.body);
+  response.writeHead(responseData.status, headers);
+
+  if (Object.prototype.hasOwnProperty.call(responseData, 'body')) {
+    response.write(bodyParse(responseData.body, responseData.type));
+  }
 };
 
 module.exports.inbound = inbound;

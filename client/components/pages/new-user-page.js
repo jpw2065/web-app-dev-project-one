@@ -1,5 +1,5 @@
-import {Nav} from './nav.js';
-import {UserForm} from './user-form.js';
+import {Nav} from '../universal/nav.js';
+import {UserNew} from '../users/user-new.js';
 
 export class NewUserPage extends React.Component {
 
@@ -7,7 +7,7 @@ export class NewUserPage extends React.Component {
       return (
         <main>
             <Nav select="new-user-page" />
-            <UserForm />
+            <UserNew />
         </main>
       );
     }

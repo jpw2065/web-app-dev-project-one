@@ -7,16 +7,30 @@ export class Users extends React.Component {
         users: []
     };
 
+    constructor(props)
+    {
+        super(props);
+
+        this.onInputChange = this.onInputChange.bind(this);
+    }
+
     async componentDidMount()
     {
-        const url = "/api/users";
+        this.searchUsers("");
+    }
 
-        fetch(url)
+    searchUsers(params)
+    {
+        fetch("/api/users" + params)
             .then(res => res.json())
             .then((data) => {
                 this.setState({ users: data, loading: false })
             })
             .catch(console.log)
+    }
+
+    onInputChange(event){
+        this.searchUsers("?search=" + event.target.value);
     }
 
     render() {
@@ -33,6 +47,7 @@ export class Users extends React.Component {
             <section class="container mt-5 text-center overflow-auto">
                 <h1 class="mb-2">Workers</h1>
                 <p>Green = Employed, Grey = Not Employed</p>
+                {!this.state.loading && <input class="mb-3" placeholder="Search Name..." type="text" onChange={this.onInputChange} /> }
                 {this.state.loading && <p>Loading...</p> }
                 {noUsers && <div><p class="mb-4">No workers found! Add a new Worker to the database.</p><a href="/users/new" class="btn btn-primary" role="button">Add Workers</a></div> }
                 {this.state.users.map((user) => (

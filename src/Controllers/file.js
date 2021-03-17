@@ -12,7 +12,6 @@ const companiesFile = fs.readFileSync(`${__dirname}/../../client/html/companies/
 const newCompanyFile = fs.readFileSync(`${__dirname}/../../client/html/companies/new-company.html`);
 const editCompanyFile = fs.readFileSync(`${__dirname}/../../client/html/companies/edit-company.html`);
 
-
 const cssFile = fs.readFileSync(`${__dirname}/../../client/style.css`);
 const jsFile = fs.readFileSync(`${__dirname}/../../client/bundle.js`);
 

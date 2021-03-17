@@ -1,5 +1,5 @@
-import {Nav} from './nav.js';
-import {Users} from './users.js';
+import {Nav} from '../universal/nav.js';
+import {Users} from '../users/users.js';
 
 export class UsersPage extends React.Component {
 

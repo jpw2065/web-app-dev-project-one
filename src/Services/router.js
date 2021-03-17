@@ -1,5 +1,6 @@
 const url = require('url');
 const query = require('querystring');
+const sizeof = require('object-sizeof');
 
 const webRoutes = require('../web-routes.js');
 const apiRoutes = require('../api-routes.js');
@@ -8,44 +9,81 @@ const errorController = require('../Controllers/error.js');
 
 const dneUrl = errorController.doesNotExist;
 
-/**
- * Handle the route if it is either a GET or POST route. We have to use a special setup for POST requests where we listen to the response coming in.
- * @param {http.ClientRequest} request - The request into the program.
- * @param {http.ServerResponse} response - The response from the program.
- * @param {array} resolvedRoute - {controller: controllerMethod, args: Arguments passed into the route}
- */
-function handleRoute(request, response, resolvedRoute) {
-  return new Promise((resolve, reject) => {
-    if (request.method === 'POST') {
-      const body = [];
+function routePostOrPatch(request, response, resolvedRoute) {
+  return new Promise((resolve) => {
+    const body = [];
 
-      request.on('error', (err) => {
-        console.dir(err);
-        response.responseData = { status: 400 };
-      });
+    request.on('error', () => {
+      response.responseData = { status: 400 };
+    });
 
-      request.on('data', (chunk) => {
-        body.push(chunk);
-      });
+    request.on('data', (chunk) => {
+      body.push(chunk);
+    });
 
-      request.on('end', () => {
-        const bodyString = Buffer.concat(body).toString();
-        const bodyParams = query.parse(bodyString);
+    request.on('end', () => {
+      const bodyString = Buffer.concat(body).toString();
+      const bodyParams = query.parse(bodyString);
+      const mergeParams = {
+        ...bodyParams,
+        ...resolvedRoute.args,
+      };
 
-        resolvedRoute.controller(request, response, bodyParams);
-
-        resolve('Route Found');
-      });
-    } else {
-      resolvedRoute.controller(request, response, resolvedRoute.args);
+      resolvedRoute.controller(request, response, mergeParams);
 
       resolve('Route Found');
-    }
+    });
+  });
+}
+
+function routeHead(request, response, resolvedRoute) {
+  return new Promise((resolve) => {
+    resolvedRoute.controller(request, response, resolvedRoute.args);
+
+    const responseStatus = response.responseData.status;
+    const responseBody = response.responseData.body;
+
+    response.responseData = { status: responseStatus, header: { 'Content-Length': sizeof(responseBody) } };
+    resolve('Route Found');
+  });
+}
+
+function routeDefault(request, response, resolvedRoute) {
+  return new Promise((resolve) => {
+    const queryParameters = url.parse(request.url, true).query;
+    const mergeParams = {
+      ...queryParameters,
+      ...resolvedRoute.args,
+    };
+
+    resolvedRoute.controller(request, response, mergeParams);
+    resolve('Route Found');
   });
 }
 
 /**
- * Clean the route trailing slashes, and the beginning slashes. This is so we can split the route easier in the wildcard methods.
+ * Handle the route if it is either a GET or POST route. We have to use a special setup
+ * for POST requests where we listen to the response coming in.
+ * @param {http.ClientRequest} request - The request into the program.
+ * @param {http.ServerResponse} response - The response from the program.
+ * @param {array} resolvedRoute - {controller: controllerMethod,
+ *                                       args: Arguments passed into the route}
+ */
+function handleRoute(request, response, resolvedRoute) {
+  switch (request.method) {
+    case 'POST':
+    case 'PATCH':
+      return routePostOrPatch(request, response, resolvedRoute);
+    case 'HEAD':
+      return routeHead(request, response, resolvedRoute);
+    default:
+      return routeDefault(request, response, resolvedRoute);
+  }
+}
+
+/**
+ * Clean the route trailing slashes, and the beginning slashes.
+ * This is so we can split the route easier in the wildcard methods.
  * @param {string} uncleanedRoute
  * @returns
  */
@@ -66,14 +104,16 @@ function isWildcardRoute(templateRoute, incomingRoute) {
   if (templateRouteCleaned.length !== incomingRouteCleaned.length) return false;
 
   for (let i = 0; i < templateRouteCleaned.length; i++) {
-    if (templateRouteCleaned[i] !== incomingRouteCleaned[i] && !/^\{.*\}$/.test(templateRouteCleaned[i])) return false;
+    if (templateRouteCleaned[i] !== incomingRouteCleaned[i]
+        && !/^\{.*\}$/.test(templateRouteCleaned[i])) return false;
   }
 
   return true;
 }
 
 /**
- * Test to see if the template ruote matches the incoming route, or if the template route is a wild card route.
+ * Test to see if the template ruote matches the incoming route,
+ * or if the template route is a wild card route.
  * @param {string} templateRoute - Route we are testing agaisnt
  * @param {string} incomingRoute - Route that is incoming into the application
  * @returns
@@ -100,7 +140,8 @@ function getRouteParameters(templateRoute, incomingRoute) {
 
   for (let i = 0; i < templateRouteCleaned.length; i++) {
     if (/^\{.*\}$/.test(templateRouteCleaned[i])) {
-      const routeParameterName = templateRouteCleaned[i].substring(1, templateRouteCleaned[i].length - 1);
+      const routeParameterName = templateRouteCleaned[i]
+        .substring(1, templateRouteCleaned[i].length - 1);
       params[routeParameterName] = incomingRouteCleaned[i];
     }
   }

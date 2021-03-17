@@ -1,5 +1,5 @@
-import {Nav} from './nav.js';
-import {Title} from './title.js';
+import {Nav} from '../universal/nav.js';
+import {Title} from '../universal/title.js';
 
 export class TitlePage extends React.Component {
 
