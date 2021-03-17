@@ -3,24 +3,24 @@ export class UserForm extends React.Component {
     render() {
       return (
         <form onSubmit={this.props.onSubmit}>
-            <div class="form-row">
-                <div class="col">
+            <div className="form-row">
+                <div className="col">
                     <label form="user-form-name">Name:</label>
-                    <input id="user-form-name" required type="text" class="form-control" name="name" defaultValue={this.props.user && this.props.user.name}/>
+                    <input id="user-form-name" required type="text" className="form-control" name="name" defaultValue={this.props.user && this.props.user.name}/>
                 </div>
-                <div class="col">
-                    <label for="user-form-email">Email:</label>
-                    <input id="user-form-email" required type="email" class="form-control" name="email" defaultValue={this.props.user && this.props.user.email}/>
+                <div className="col">
+                    <label htmlFor="user-form-email">Email:</label>
+                    <input id="user-form-email" required type="email" className="form-control" name="email" defaultValue={this.props.user && this.props.user.email}/>
                 </div>
             </div>
-            <div class="form-row">
-                <div class="col">
-                    <label for="user-form-phone">Phone:</label>
-                    <input id="user-form-phone" required type="tel" class="form-control" name="phone" defaultValue={this.props.user && this.props.user.phone}/>
+            <div className="form-row">
+                <div className="col">
+                    <label htmlFor="user-form-phone">Phone:</label>
+                    <input id="user-form-phone" required type="tel" className="form-control" name="phone" defaultValue={this.props.user && this.props.user.phone}/>
                 </div>
-                <div class="col">
-                    <label for="user-form-trade">Trade:</label>
-                    <select id="user-form-trade" required class="form-control" name="trade" defaultValue={this.props.user && this.props.user.trade}>
+                <div className="col">
+                    <label htmlFor="user-form-trade">Trade:</label>
+                    <select id="user-form-trade" required className="form-control" name="trade" defaultValue={this.props.user && this.props.user.trade}>
                         <option>Bell Hanger</option>
                         <option>Boilermaker</option>
                         <option>Carpenter</option>
@@ -54,28 +54,28 @@ export class UserForm extends React.Component {
                     </select>
                 </div>
             </div>
-            <div class="form-row">
-                <div class="col">
-                    <label for="user-form-employed">Employed:</label>
-                    <select id="user-form-employed" class="form-control" name="employed" defaultValue={this.props.user && this.props.user.employed}>
+            <div className="form-row">
+                <div className="col">
+                    <label htmlFor="user-form-employed">Employed:</label>
+                    <select id="user-form-employed" className="form-control" name="employed" defaultValue={this.props.user && this.props.user.employed}>
                         <option value="No">No</option>
                         <option value="Yes">Yes</option>
                     </select>
                 </div>
-                <div class="col">
-                    <label for="user-form-employer">Employer:</label>
-                    <input id="user-form-employer" type="text" class="form-control" name="employer" defaultValue={this.props.user && this.props.user.employer}/>
+                <div className="col">
+                    <label htmlFor="user-form-employer">Employer:</label>
+                    <input id="user-form-employer" type="text" className="form-control" name="employer" defaultValue={this.props.user && this.props.user.employer}/>
                 </div>
             </div>
-            <div class="form-row">
-                <div class="col">
-                    <label for="user-form-info">Additional Info</label>
-                    <textarea id="user-form-info" class="form-control" rows="3" name="info" defaultValue={this.props.user && this.props.user.info}></textarea>
+            <div className="form-row">
+                <div className="col">
+                    <label htmlFor="user-form-info">Additional Info</label>
+                    <textarea id="user-form-info" className="form-control" rows="3" name="info" defaultValue={this.props.user && this.props.user.info}></textarea>
                 </div>
             </div>
-            <div class="form-row text-center">
-                <div class="col">
-                    <button type="submit" class="btn btn-primary">Submit</button>
+            <div className="form-row text-center">
+                <div className="col">
+                    <button type="submit" className="btn btn-primary">Submit</button>
                 </div>
             </div>
         </form>

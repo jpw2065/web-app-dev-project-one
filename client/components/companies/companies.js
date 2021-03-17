@@ -44,13 +44,13 @@ export class Companies extends React.Component {
         }
 
         return (
-            <section class="container mt-5 text-center overflow-auto">
-                <h1 class="mb-2">Companies</h1>
-                {!this.state.loading && <input class="mb-3" placeholder="Search Name..." type="text" onChange={this.onInputChange} /> }
+            <section className="container mt-5 text-center overflow-auto">
+                <h1 className="mb-2">Companies</h1>
+                {!this.state.loading && <input className="mb-3" placeholder="Search Name..." type="text" onChange={this.onInputChange} /> }
                 {this.state.loading && <p>Loading...</p> }
-                {noCompanies && <div><p class="mb-4">No companies found! Add a new Company to the database.</p><a href="/companies/new" class="btn btn-primary" role="button">Add Company</a></div> }
+                {noCompanies && <div><p className="mb-4">No companies found! Add a new Company to the database.</p><a href="/companies/new" className="btn btn-primary" role="button">Add Company</a></div> }
                 {this.state.companies.map((company) => (
-                        <CompanyCard company={ company }/>
+                        <CompanyCard key="{company}" company={ company }/>
                     ))}
             </section>
       );

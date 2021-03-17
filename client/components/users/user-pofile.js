@@ -59,71 +59,71 @@ export class UserProfile extends React.Component {
 
     render() {
       return (
-        <div class="container d-flex flex-column justify-content-center">
+        <div className="container d-flex flex-column justify-content-center">
 
-            <div class="card text-left mb-4 mt-4">
-                <div class="card-header pt-4 pb-4">
-                    <h1 class="font-weight-normal card-title text-center m-0">{this.state.user.name}</h1>
+            <div className="card text-left mb-4 mt-4">
+                <div className="card-header pt-4 pb-4">
+                    <h1 className="font-weight-normal card-title text-center m-0">{this.state.user.name}</h1>
                 </div>
 
-                <div class="card-body pt-5 pb-5">
-                    <h4 class="text-center mb-2">Pesonal Information</h4>
-                    <div class="row">
-                        <div class="col-4 text-right p-0">
-                            <p class="font-weight-bold pr-2">Phone: </p>
+                <div className="card-body pt-5 pb-5">
+                    <h4 className="text-center mb-2">Pesonal Information</h4>
+                    <div className="row">
+                        <div className="col-4 text-right p-0">
+                            <p className="font-weight-bold pr-2">Phone: </p>
                         </div>
 
-                        <div class="col-4 d-flex flex-row justify-content-between p-0">
+                        <div className="col-4 d-flex flex-row justify-content-between p-0">
                             <p>{this.state.user.phone}</p>
-                            <p class="font-weight-bold pr-2">Email: </p>
+                            <p className="font-weight-bold pr-2">Email: </p>
                         </div>
 
-                        <div class="col-4 text-left p-0">
+                        <div className="col-4 text-left p-0">
                             <p>{this.state.user.email}</p>
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="col-4 text-right p-0">
-                            <p class="font-weight-bold pr-2">Trade: </p>
+                    <div className="row">
+                        <div className="col-4 text-right p-0">
+                            <p className="font-weight-bold pr-2">Trade: </p>
                         </div>
 
-                        <div class="col-4 d-flex flex-row justify-content-between p-0">
+                        <div className="col-4 d-flex flex-row justify-content-between p-0">
                             <p>{this.state.user.trade}</p>
-                            <p class="font-weight-bold pr-2">Resume: </p>
+                            <p className="font-weight-bold pr-2">Resume: </p>
                         </div>
 
-                        <div class="col-4 text-left p-0">
+                        <div className="col-4 text-left p-0">
                             <p>No</p>
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="col-4 text-right p-0">
-                            <p class="font-weight-bold pr-2">Employed: </p>
+                    <div className="row">
+                        <div className="col-4 text-right p-0">
+                            <p className="font-weight-bold pr-2">Employed: </p>
                         </div>
 
-                        <div class="col-4 d-flex flex-row justify-content-between p-0">
+                        <div className="col-4 d-flex flex-row justify-content-between p-0">
                             <p>{this.state.user.employed}</p>
-                            <p class="font-weight-bold pr-2">Employer: </p>
+                            <p className="font-weight-bold pr-2">Employer: </p>
                         </div>
 
-                        <div class="col-4 text-left p-0">
+                        <div className="col-4 text-left p-0">
                             <p>{this.state.user.employer}</p>
                         </div>
                     </div>
 
-                    <h4 class="text-center mt-5 mb-2">Additional Information</h4>
-                    <p class="text-center">{this.state.user.info}</p>
+                    <h4 className="text-center mt-5 mb-2">Additional Information</h4>
+                    <p className="text-center">{this.state.user.info}</p>
                 </div>
 
-                <div class="card-footer pt-4 pb-4 d-flex flex-row justify-content-between">
+                <div className="card-footer pt-4 pb-4 d-flex flex-row justify-content-between">
                     <div>
-                        {this.state.user.employed === "Yes" ? (<button class="btn btn-primary" onClick={() => this.setUnemployed() }>Mark Un-employed</button>) : (<button class="btn btn-primary" onClick={() => this.setEmployed() }>Mark Employed</button>) }
+                        {this.state.user.employed === "Yes" ? (<button className="btn btn-primary" onClick={() => this.setUnemployed() }>Mark Un-employed</button>) : (<button className="btn btn-primary" onClick={() => this.setEmployed() }>Mark Employed</button>) }
                     </div>  
                     <div>
-                        <a href={ "/users/" + this.state.user.id + "/edit" } class="btn btn-primary mr-2" role="button">Edit</a>
-                        <button class="btn btn-danger" onClick={() => this.delete() }>Delete</button>
+                        <a href={ "/users/" + this.state.user.id + "/edit" } className="btn btn-primary mr-2" role="button">Edit</a>
+                        <button className="btn btn-danger" onClick={() => this.delete() }>Delete</button>
                     </div>
                 </div>
             </div>

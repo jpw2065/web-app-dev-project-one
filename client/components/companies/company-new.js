@@ -32,8 +32,8 @@ export class CompanyNew extends React.Component {
 
     render() {
       return (
-        <div class="container d-flex flex-column justify-content-center">
-            <h1 class="text-center mb-2">New Company</h1>
+        <div className="container d-flex flex-column justify-content-center">
+            <h1 className="text-center mb-2">New Company</h1>
             <CompanyForm onSubmit={this.handleSubmit} />
         </div>
       );

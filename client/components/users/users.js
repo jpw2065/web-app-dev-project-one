@@ -44,14 +44,14 @@ export class Users extends React.Component {
         }
 
         return (
-            <section class="container mt-5 text-center overflow-auto">
-                <h1 class="mb-2">Workers</h1>
+            <section className="container mt-5 text-center overflow-auto">
+                <h1 className="mb-2">Workers</h1>
                 <p>Green = Employed, Grey = Not Employed</p>
-                {!this.state.loading && <input class="mb-3" placeholder="Search Name..." type="text" onChange={this.onInputChange} /> }
+                {!this.state.loading && <input className="mb-3" placeholder="Search Name..." type="text" onChange={this.onInputChange} /> }
                 {this.state.loading && <p>Loading...</p> }
-                {noUsers && <div><p class="mb-4">No workers found! Add a new Worker to the database.</p><a href="/users/new" class="btn btn-primary" role="button">Add Workers</a></div> }
+                {noUsers && <div><p className="mb-4">No workers found! Add a new Worker to the database.</p><a href="/users/new" className="btn btn-primary" role="button">Add Workers</a></div> }
                 {this.state.users.map((user) => (
-                        <UserCard user={ user }/>
+                        <UserCard key="{user}" user={ user }/>
                     ))}
             </section>
       );

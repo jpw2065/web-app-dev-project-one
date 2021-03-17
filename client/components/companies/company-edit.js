@@ -47,8 +47,8 @@ export class CompanyEdit extends React.Component {
 
     render() {
       return (
-        <div class="container d-flex flex-column justify-content-center">
-            { !this.state.loading && <h1 class="text-center mb-2">Edit Company : {this.state.company.name}</h1> }
+        <div className="container d-flex flex-column justify-content-center">
+            { !this.state.loading && <h1 className="text-center mb-2">Edit Company : {this.state.company.name}</h1> }
             { !this.state.loading && <CompanyForm onSubmit={this.handleSubmit} company={ this.state.company } />  }
         </div>
       );

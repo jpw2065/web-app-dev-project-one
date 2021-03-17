@@ -47,8 +47,8 @@ export class UserEdit extends React.Component {
 
     render() {
       return (
-        <div class="container d-flex flex-column justify-content-center">
-            { !this.state.loading && <h1 class="text-center mb-2">Edit Worker : {this.state.user.name}</h1> }
+        <div className="container d-flex flex-column justify-content-center">
+            { !this.state.loading && <h1 className="text-center mb-2">Edit Worker : {this.state.user.name}</h1> }
             { !this.state.loading && <UserForm onSubmit={this.handleSubmit} user={ this.state.user } />  }
         </div>
       );
